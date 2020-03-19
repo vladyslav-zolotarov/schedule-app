@@ -1,0 +1,21 @@
+@import "../globalStyles";
+
+.schedule-page{
+  margin-left: 80px;
+  text-align: center;
+  height: 100vh;
+  font-family: $main-font;
+  background-color: $color-light-gray;
+
+  .schedule-main-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .schedule-text{
+    font-size: medium;
+    margin: 20px;
+  }
+}

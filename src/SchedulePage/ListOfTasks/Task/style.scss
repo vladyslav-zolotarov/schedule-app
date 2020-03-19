@@ -1,0 +1,58 @@
+@import '../../../globalStyles';
+
+.task-main-content{
+  width: 76%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px;
+  margin: 15px 100px;
+  height: 40px;
+  background-color: $color-white;
+  box-shadow: 4px -3px 9px -6px #c0c0c0;
+
+
+
+
+  .time-picker{
+    //width: 10%;
+    border-right: 2px solid $color-light-gray;
+  }
+  .task-input{
+    width: 80%;
+    font-family: $main-font;
+    font-size: medium;
+    padding: 5px 10px;
+    border: 0;
+    border-right: 2px solid $color-light-gray;
+
+
+    &:focus{
+      outline: none;
+    }
+
+    &::placeholder{
+      font-family: $main-font;
+      font-size: medium;
+    }
+  }
+
+  .task-butt{
+    width: 10%;
+    border: 0;
+    font-family: $main-font;
+    font-size: medium;
+
+
+    &:hover{
+      cursor: pointer;
+      background-color: $color-gray;
+    }
+
+    &:focus{
+      outline: none;
+      //background-color: $color-light-green;
+      //color: $color-white;
+      transition: ease 0.5s;
+    }
+  }
+}

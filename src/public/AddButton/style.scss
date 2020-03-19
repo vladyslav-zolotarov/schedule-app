@@ -1,0 +1,36 @@
+@import '../../globalStyles';
+
+.button-add{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 170px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 4px;
+  color: $color-white;
+  background-color: $color-light-green;
+  box-shadow: -9px -4px 30px -13px #c0c0c0;
+
+  &:hover{
+    cursor: pointer;
+    background-color: $color-green;
+  }
+
+  &:focus{
+    outline: none;
+  }
+
+  p{
+    font-size: medium;
+    font-weight: 800;
+    font-family: $main-font;
+    padding-left: 5px;
+  }
+
+  svg{
+    color: $color-white;
+  }
+}

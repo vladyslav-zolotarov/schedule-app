@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+$main-font: "Montserrat";
+
+$color-white: #fff;
+$color-gray: #e2e2e2;
+$color-light-gray: #f9f9f9;
+$color-light-gray-2: #f2f2f2;
+$color-light-green: #4CAF50;
+$color-green: #419644 ;
+
+
+%hover-calendar {
+  cursor: pointer;
+  background-color: $color-light-gray-2;
+}
