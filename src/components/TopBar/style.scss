@@ -1,6 +1,6 @@
-@import '../../globalStyles';
+@import "styles/globalStyles";
 
-.top-content{
+.top-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,10 +8,10 @@
   height: 10%;
   background-color: $color-white;
 
-  .user-content{
+  .user-content {
     display: flex;
     flex-direction: row;
-    p{
+    p {
       padding-left: 10px;
     }
   }

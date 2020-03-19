@@ -1,6 +1,6 @@
-@import '../../globalStyles';
+@import "styles/globalStyles";
 
-.button-add{
+.button-add {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -14,23 +14,23 @@
   background-color: $color-light-green;
   box-shadow: -9px -4px 30px -13px #c0c0c0;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
     background-color: $color-green;
   }
 
-  &:focus{
+  &:focus {
     outline: none;
   }
 
-  p{
+  p {
     font-size: medium;
     font-weight: 800;
     font-family: $main-font;
     padding-left: 5px;
   }
 
-  svg{
+  svg {
     color: $color-white;
   }
 }

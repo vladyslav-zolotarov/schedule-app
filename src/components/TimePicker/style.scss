@@ -1,18 +1,16 @@
-@import '../../globalStyles';
+@import "styles/globalStyles";
 
-.input-picker{
+.input-picker {
   height: 100%;
   //width: 100%;
   font-size: large;
   font-family: $main-font;
   border: 0;
   padding: 0 10px;
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
-  &:focus{
+  &:focus {
     outline: none;
   }
 }
-
-

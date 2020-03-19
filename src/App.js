@@ -1,95 +1,91 @@
 //Libraries
-import React, {createContext, useState} from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-//Css
-import './style.scss'
-//Components
-import Menu from "./public/Menu";
-import CalendarMonthsPage from "./CalendarMonthsPage";
-import WelcomePage from "./WelcomePage";
-import SchedulePage from "./SchedulePage";
-import { userContext } from "./context";
-import  dateFormat  from 'dateformat/lib/dateformat'
-import ReportPage from "./ReportPage";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { history } from "utils/history";
 
+//Css
+import "./style.scss";
+//Components
+import Menu from "components/Menu";
+import CalendarMonthsPage from "pages/CalendarMonthsPage";
+import WelcomePage from "pages/WelcomePage";
+import SchedulePage from "pages/SchedulePage";
+import { userContext } from "utils/context";
+import ReportPage from "pages/ReportPage";
 
 export default function App() {
+  const [selectedDay, setSelectedDay] = useState(null);
 
-    const [ selectedDay, setSelectedDay ] = useState('');
-    const [ tasks, setTasks ] = useState([]);
-    const [ amountTaskBar, setAmountTaskBar ] = useState([]);
+  const { pathname } = history.location;
 
-    const [ s, setS ] = useState(false)
+  useEffect(() => {
+    if (pathname.includes("directory")) {
+      console.log(pathname);
+      setSelectedDay(pathname);
+    }
+    setSelectedDay(null);
+  }, [pathname]);
 
+  const [tasks, setTasks] = useState([]);
+  const [amountTaskBar, setAmountTaskBar] = useState([]);
 
-    const SelectADay = day =>{
-        if (day !== ''){
-            const newDate = dateFormat(day, 'd mmmm yyyy');
-            setSelectedDay(newDate);
-        } else {
-            setSelectedDay(day)
+  const AddNewTask = (time, action) => {
+    if (selectedDay) {
+      setTasks([
+        ...tasks,
+        {
+          id: Date.now(),
+          date: selectedDay,
+          task: {
+            time: time,
+            action: action
+          }
         }
-    };
+      ]);
+    }
+  };
 
-    const AddNewTask = (time, action) => {
-        if(selectedDay !== '') {
-            setTasks([
-                ...tasks,
-                {
-                    id: Date.now(),
-                    date: selectedDay,
-                    task: {
-                        time: time,
-                        action: action
-                    }
-                }
-            ])
+  const AddTaskBar = () => {
+    if (selectedDay) {
+      setAmountTaskBar([
+        ...amountTaskBar,
+        {
+          id: selectedDay,
+          task: "task"
         }
-    };
-
-    const AddTaskBar = () => {
-        if(selectedDay !== ''){
-            setAmountTaskBar([
-                ...amountTaskBar,{
-                    id: selectedDay,
-                    task: 'task'
-                }
-            ]);
-        }
-    };
+      ]);
+    }
+  };
 
   return (
-      <userContext.Provider value={{
-          SelectADay, AddNewTask, AddTaskBar,
-          selectedDay, amountTaskBar, tasks ,
-          setS
-      }}>
-        <div className="App">
-            <Menu />
-            <BrowserRouter>
-                {/*{selectedDay === '' ? (*/}
-                {/*    <Redirect exact to={"/"} />*/}
-                {/*) : null}*/}
-                {/*{s ? (*/}
-                {/*    <Redirect exact to={"/report"} />*/}
-                {/*): null}*/}
-                <Switch>
-                    <Route exact path={'/'}>
-                        <CalendarMonthsPage />
-                    </Route>
-                    <Route path={'/welcome'}>
-                        <WelcomePage />
-                    </Route>
-                    <Route path={'/directory'}>
-                        <SchedulePage />
-                    </Route>
-                    <Route path={'/report'}>
-                        <ReportPage />
-                    </Route>
-                </Switch>
-            </BrowserRouter>
-        </div>
-      </userContext.Provider>
+    <userContext.Provider
+      value={{
+        AddNewTask,
+        AddTaskBar,
+        selectedDay,
+        amountTaskBar,
+        tasks
+      }}
+    >
+      <div className="App">
+        <BrowserRouter history={history}>
+          <Menu />
+          <Switch>
+            <Route exact path="/">
+              <CalendarMonthsPage />
+            </Route>
+            <Route path={"/welcome"}>
+              <WelcomePage />
+            </Route>
+            <Route path={"/directory"}>
+              <SchedulePage />
+            </Route>
+            <Route path={"/report"}>
+              <ReportPage />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </userContext.Provider>
   );
 }
-

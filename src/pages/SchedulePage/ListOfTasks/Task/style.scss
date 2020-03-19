@@ -1,6 +1,6 @@
-@import '../../../globalStyles';
+@import "styles/globalStyles.scss";
 
-.task-main-content{
+.task-main-content {
   width: 76%;
   display: flex;
   justify-content: space-between;
@@ -10,14 +10,11 @@
   background-color: $color-white;
   box-shadow: 4px -3px 9px -6px #c0c0c0;
 
-
-
-
-  .time-picker{
+  .time-picker {
     //width: 10%;
     border-right: 2px solid $color-light-gray;
   }
-  .task-input{
+  .task-input {
     width: 80%;
     font-family: $main-font;
     font-size: medium;
@@ -25,30 +22,28 @@
     border: 0;
     border-right: 2px solid $color-light-gray;
 
-
-    &:focus{
+    &:focus {
       outline: none;
     }
 
-    &::placeholder{
+    &::placeholder {
       font-family: $main-font;
       font-size: medium;
     }
   }
 
-  .task-butt{
+  .task-butt {
     width: 10%;
     border: 0;
     font-family: $main-font;
     font-size: medium;
 
-
-    &:hover{
+    &:hover {
       cursor: pointer;
       background-color: $color-gray;
     }
 
-    &:focus{
+    &:focus {
       outline: none;
       //background-color: $color-light-green;
       //color: $color-white;
