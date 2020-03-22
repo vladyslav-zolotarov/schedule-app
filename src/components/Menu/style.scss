@@ -1,4 +1,4 @@
-@import "styles/globalStyles";
+@import 'styles/globalStyles';
 
 .menu {
   height: 100vh;
@@ -10,30 +10,30 @@
   border-right: $color-gray 1px solid;
 }
 
-.logo, .footer {
+.logo,
+.footer {
   text-align: center;
   svg {
     padding: 30px 0;
   }
 }
-.logo{
+.logo {
   display: flex;
   height: 80px;
   align-items: center;
   justify-content: center;
 }
 
-.menu-icon{
+.menu-icon {
   width: 30px;
   height: 30px;
   color: black;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
     color: grey;
   }
 }
-
 
 .main-content {
   display: flex;

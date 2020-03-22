@@ -1,20 +1,20 @@
-import React, { useContext } from "react";
-import Task from "./Task";
-import "./style.scss";
-import { userContext } from "utils/context";
+import React, { useContext } from 'react'
+import Task from './Task'
+import './style.scss'
+import { userContext } from 'utils/context'
 
 export default function ListOfTasks() {
-  const { amountTaskBar, selectedDay, tasks } = useContext(userContext);
+  const { selectedDay, tasks } = useContext(userContext)
 
   const content = tasks.map((task, index) => {
     if (task.date === selectedDay) {
       return (
-          <li key={index}>
-            <Task id={task.id} />
-          </li>
+        <li key={index}>
+          <Task id={task.id} />
+        </li>
       )
-    } else return null;
-  });
+    } else return null
+  })
 
-  return <ul className="list-of-task-main-content">{content}</ul>;
+  return <ul className="list-of-task-main-content">{content}</ul>
 }

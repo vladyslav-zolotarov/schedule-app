@@ -1,21 +1,21 @@
 //Libraries
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { history } from "utils/history";
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { history } from 'utils/history'
 
 //Css
-import "./style.scss";
+import './style.scss'
 //Components
-import Menu from "components/Menu";
-import CalendarMonthsPage from "pages/CalendarMonthsPage";
-import WelcomePage from "pages/WelcomePage";
-import SchedulePage from "pages/SchedulePage";
-import { userContext } from "utils/context";
-import ReportPage from "pages/ReportPage";
+import Menu from 'components/Menu'
+import CalendarMonthsPage from 'pages/CalendarMonthsPage'
+import WelcomePage from 'pages/WelcomePage'
+import SchedulePage from 'pages/SchedulePage'
+import { userContext } from 'utils/context'
+import ReportPage from 'pages/ReportPage'
 import dateFormat from 'dateformat/lib/dateformat'
+import { v4 } from 'uuid'
 
 export default function App() {
-
   // const { pathname } = history.location;
   //
   // useEffect(() => {
@@ -26,113 +26,87 @@ export default function App() {
   //   setSelectedDay(null);
   // }, [pathname]);
 
-  const [tasks, setTasks] = useState([]);
-  const [amountTaskBar, setAmountTaskBar] = useState([]);
-  const [selectedDay, setSelectedDay] = useState('');
+  const [tasks, setTasks] = useState([])
+  const [selectedDay, setSelectedDay] = useState('')
 
+  useEffect(() => {
+    console.log(tasks)
+  }, [tasks])
 
-  const SelectADay = day =>{
-    if (day !== ''){
-      const newDate = dateFormat(day, 'd mmmm yyyy');
-      setSelectedDay(newDate);
+  const selectADay = day => {
+    if (day !== '') {
+      const newDate = dateFormat(day, 'd mmmm yyyy')
+      setSelectedDay(newDate)
     } else {
       setSelectedDay(day)
     }
-  };
+  }
 
-  const AddNewTask = () => {
+  const addNewTask = () => {
     if (selectedDay) {
       setTasks([
         ...tasks,
-
         {
-          id: Date.now(),
+          id: v4,
           date: selectedDay,
           task: {
             time: '',
-            action: ''
-          }
-        }
-      ]);
+            action: '',
+          },
+        },
+      ])
     }
-  };
+  }
 
-  const UpdateNewTask = (id, time, action) => {
-    console.log('id', id);
-    console.log('time', time);
-    console.log('action', action);
-
+  const updateNewTask = (id, time, action) => {
     if (selectedDay) {
-      console.log('tasks.id', tasks)
-      const cont = tasks.map(t => {
-        if(t.id === id){
-          return [{id: id, date: selectedDay, tasks: { time: time, action: action }}]
+      const updatedTasks = tasks.map(t => {
+        if (t.id === id) {
+          return (t = { id, date: selectedDay, tasks: { time, action } })
         }
-      });
+        return t
+      })
 
-      console.log(cont)
-
-      setTasks([
-        ...tasks,
-        cont
-      ]);
+      setTasks(updatedTasks)
     }
+  }
 
-
-
-  };
-
-
-  const RemoveTask = id => {
+  const removeTask = id => {
     setTasks(tasks.filter(task => task.id !== id))
-  };
-
-
-  const AddTaskBar = () => {
-    if (selectedDay) {
-      setAmountTaskBar([
-        ...amountTaskBar,
-        {
-          id: selectedDay,
-          task: "task"
-        }
-      ]);
-    }
-  };
+  }
 
   return (
     <userContext.Provider
       value={{
-        AddNewTask,
-        // AddTaskBar,
+        addNewTask,
+        // addTaskBar,
         selectedDay,
-        // amountTaskBar,
         tasks,
-        SelectADay, RemoveTask, UpdateNewTask
+        selectADay,
+        removeTask,
+        updateNewTask,
       }}
     >
       <div className="App">
         <BrowserRouter history={history}>
           <Menu />
-          {selectedDay === '' ? (
-              <Redirect to={'/'} />
-          ) : null}
+          {selectedDay === '' ? <Redirect to={'/'} /> : null}
           <Switch>
             <Route exact path="/">
               <CalendarMonthsPage />
             </Route>
-            <Route path={"/welcome"}>
+            <Route path={'/welcome'}>
               <WelcomePage />
             </Route>
-            <Route path={"/day"}>
+            <Route path={'/day'}>
               <SchedulePage />
             </Route>
-            <Route path={"/report"}>
+            <Route path={'/report'}>
               <ReportPage />
             </Route>
           </Switch>
         </BrowserRouter>
       </div>
     </userContext.Provider>
-  );
+  )
 }

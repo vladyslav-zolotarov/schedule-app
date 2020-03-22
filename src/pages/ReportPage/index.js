@@ -1,24 +1,21 @@
-import React, { useContext } from "react";
-import TopBar from "components/TopBar";
-import Card from "../../components/Card";
-import "./style.scss";
+import React, { useContext } from 'react'
+import TopBar from 'components/TopBar'
+import Card from '../../components/Card'
+import './style.scss'
 import { FaTrashAlt } from 'react-icons/all'
-import { userContext } from "utils/context";
+import { userContext } from 'utils/context'
 
 export default function ReportPage() {
-    return(
-        <div className="report-page">
-            <TopBar text={"Report page"} />
-            <div className="report-main-content">
-                <Card />
-            </div>
-        </div>
-    )
+  return (
+    <div className="report-page">
+      <TopBar text={'Report page'} />
+      <div className="report-main-content">
+        <Card />
+      </div>
+    </div>
+  )
 
-
-
-
-  // const { tasks, RemoveTask } = useContext(userContext);
+  // const { tasks, removeTask } = useContext(userContext);
   //
   // const contentTable = tasks.map((tasks, index) => {
   //   return (
@@ -26,7 +23,7 @@ export default function ReportPage() {
   //       <td>{tasks.task.time}</td>
   //       <td>{tasks.task.action}</td>
   //       <td>
-  //           <button className="report-page-butt" onClick={() => RemoveTask(tasks.id)}>
+  //           <button className="report-page-butt" onClick={() => removeTask(tasks.id)}>
   //               <FaTrashAlt />
   //           </button>
   //       </td>

@@ -1,4 +1,4 @@
-@import "styles/globalStyles";
+@import 'styles/globalStyles';
 
 .report-page {
   margin-left: 80px;
@@ -25,19 +25,17 @@
         border-bottom: 1px solid $color-gray;
       }
 
-
-      .report-page-butt{
+      .report-page-butt {
         border: 0;
         height: 40px;
         width: 40px;
 
-        svg{
+        svg {
           height: 15px;
           width: 15px;
         }
 
-
-        &:hover{
+        &:hover {
           border-radius: 20px;
           background-color: $color-light-gray-2;
           transition: background-color, color ease 1s;
@@ -45,7 +43,7 @@
           //color: $color-gray;
         }
 
-        &:focus{
+        &:focus {
           outline: none;
         }
       }
