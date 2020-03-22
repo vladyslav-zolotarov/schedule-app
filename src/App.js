@@ -30,7 +30,7 @@ export default function App() {
   const [selectedDay, setSelectedDay] = useState('')
 
   useEffect(() => {
-    console.log(tasks, '')
+    console.log(tasks)
   }, [tasks])
 
   const selectADay = day => {
