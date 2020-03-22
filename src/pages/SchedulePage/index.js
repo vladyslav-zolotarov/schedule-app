@@ -7,15 +7,15 @@ import ListOfTasks from "./ListOfTasks";
 import "./style.scss";
 
 export default function SchedulePage() {
-  const { selectedDay, AddTaskBar } = useContext(userContext);
+  const { selectedDay, AddNewTask } = useContext(userContext);
 
   return (
     <div className="schedule-page">
       <TopBar text={"SchedulePage"} />
       <div className="schedule-main-content">
-        <div className="schedule-text">{selectedDay?.toString()}</div>
+        <div className="schedule-text">{selectedDay}</div>
         <ListOfTasks />
-        <div onClick={() => AddTaskBar()}>
+        <div onClick={() => AddNewTask()}>
           <AddButton />
         </div>
       </div>

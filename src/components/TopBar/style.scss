@@ -11,8 +11,15 @@
   .user-content {
     display: flex;
     flex-direction: row;
+    align-items: center;
+
     p {
       padding-left: 10px;
+    }
+
+    .top-bar-icon{
+      height: 30px;
+      width: 30px;
     }
   }
 }

@@ -1,45 +1,59 @@
 import React, { useContext } from "react";
 import TopBar from "components/TopBar";
+import Card from "../../components/Card";
 import "./style.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FaTrashAlt } from 'react-icons/all'
 import { userContext } from "utils/context";
 
 export default function ReportPage() {
-  const { selectedDay, amountTaskBar, tasks } = useContext(userContext);
+    return(
+        <div className="report-page">
+            <TopBar text={"Report page"} />
+            <div className="report-main-content">
+                <Card />
+            </div>
+        </div>
+    )
 
-  const contentTable = tasks.map((tasks, index) => {
-    // console.log('date', date);
-    // console.log('task', task);
-    return (
-      <tr key={index}>
-        <td>{tasks.date}</td>
-        <td>{tasks.task.time}</td>
-        <td>{tasks.task.action}</td>
-        <td>
-          <FontAwesomeIcon icon={faTrashAlt} size="1x" color="gray" />
-        </td>
-      </tr>
-    );
-  });
 
-  return (
-    <div className="report-page">
-      <TopBar text={"ReportPage"} />
-      <div className="report-main-content">
-        <h3>20 March 2020</h3>
-        <table className="report-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>What to do</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>{contentTable}</tbody>
-        </table>
-      </div>
-    </div>
-  );
+
+
+  // const { tasks, RemoveTask } = useContext(userContext);
+  //
+  // const contentTable = tasks.map((tasks, index) => {
+  //   return (
+  //     <tr key={index}>
+  //       <td>{tasks.task.time}</td>
+  //       <td>{tasks.task.action}</td>
+  //       <td>
+  //           <button className="report-page-butt" onClick={() => RemoveTask(tasks.id)}>
+  //               <FaTrashAlt />
+  //           </button>
+  //       </td>
+  //     </tr>
+  //   );
+  // });
+  //
+  // return (
+  //   <div className="report-page">
+  //     <TopBar text={"ReportPage"} />
+  //     <div className="report-main-content">
+  //       <table className="report-table">
+  //         <thead>
+  //         <tr>
+  //             <th colSpan="3">
+  //                 <h3>20 March 2020</h3>
+  //             </th>
+  //         </tr>
+  //           <tr>
+  //             <th>Time</th>
+  //             <th>What to do</th>
+  //             <th>Action</th>
+  //           </tr>
+  //         </thead>
+  //         <tbody>{contentTable}</tbody>
+  //       </table>
+  //     </div>
+  //   </div>
+  // );
 }

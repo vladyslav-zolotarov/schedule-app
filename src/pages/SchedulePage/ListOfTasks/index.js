@@ -4,13 +4,17 @@ import "./style.scss";
 import { userContext } from "utils/context";
 
 export default function ListOfTasks() {
-  const { amountTaskBar, selectedDay } = useContext(userContext);
+  const { amountTaskBar, selectedDay, tasks } = useContext(userContext);
 
-  const content = amountTaskBar.map((task, index) => {
-    if (task.id === selectedDay) {
-      return <Task />;
+  const content = tasks.map((task, index) => {
+    if (task.date === selectedDay) {
+      return (
+          <li key={index}>
+            <Task id={task.id} />
+          </li>
+      )
     } else return null;
   });
 
-  return <div className="list-of-task-main-content">{content}</div>;
+  return <ul className="list-of-task-main-content">{content}</ul>;
 }

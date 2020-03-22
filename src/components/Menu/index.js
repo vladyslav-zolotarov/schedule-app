@@ -1,35 +1,26 @@
-//Libraries
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChild,
-  faQuestion,
-  faChartLine,
-  faCalendarAlt
-} from "@fortawesome/free-solid-svg-icons";
-
-//Styles
+import { FaCalendarAlt, GiBison, FaChartLine, FaQuestionCircle } from "react-icons/all";
 import "./style.scss";
 import { Link } from "react-router-dom";
-
-//Component
 
 export default function Menu() {
   return (
     <div className="menu">
       <div className="logo">
-        <FontAwesomeIcon icon={faChild} size="lg" color="gray" />
+        <Link to={"/welcome"}>
+          <GiBison className="menu-icon"/>
+        </Link>
       </div>
       <div className="main-content">
         <Link to={"/"}>
-          <FontAwesomeIcon icon={faCalendarAlt} size="lg" color="gray" />
+            <FaCalendarAlt className="menu-icon" />
         </Link>
         <Link to={"/report"}>
-          <FontAwesomeIcon icon={faChartLine} size="lg" color="gray" />
+            <FaChartLine className="menu-icon" />
         </Link>
       </div>
       <div className="footer">
-        <FontAwesomeIcon icon={faQuestion} size="lg" color="gray" />
+          <FaQuestionCircle className="menu-icon" />
       </div>
     </div>
   );

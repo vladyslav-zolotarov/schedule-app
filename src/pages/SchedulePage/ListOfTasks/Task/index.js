@@ -1,21 +1,22 @@
 import React, { useContext, useState } from "react";
 import "./style.scss";
 import "components/TimePicker/style.scss";
+import { FaTrashAlt } from "react-icons/all";
 
 import { userContext } from "utils/context";
 
-export default function Task() {
+export default function Task ({ id }) {
   const [actionValue, setActionValue] = useState("");
   const [timeValue, setTimeValue] = useState("");
   const [disableValue, setDisableValue] = useState(false);
 
-  const { AddNewTask } = useContext(userContext);
+  const { AddNewTask, UpdateNewTask } = useContext(userContext);
 
   const onSubmit = e => {
     e.preventDefault();
     if (timeValue !== "" && actionValue !== "") {
-      AddNewTask(timeValue, actionValue);
-      setDisableValue(true);
+        UpdateNewTask(id, timeValue, actionValue);
+        setDisableValue(true);
     }
   };
 
@@ -47,6 +48,13 @@ export default function Task() {
       >
         Add
       </button>
+        <button
+            type="submit"
+            className="task-butt"
+            onClick={e => onSubmit(e)}
+        >
+            <FaTrashAlt />
+        </button>
     </form>
   );
 }

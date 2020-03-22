@@ -1,5 +1,5 @@
 //Libraries
-import React from "react";
+import React, {useContext} from "react";
 import { useHistory } from "react-router-dom";
 import dateFormat from "dateformat/lib/dateformat";
 //Css
@@ -8,17 +8,20 @@ import "./style.scss";
 //Components
 import Calendar from "react-calendar";
 import TopBar from "components/TopBar";
+import {userContext} from "../../utils/context";
 
 export default function CalendarMonthsPage() {
   const history = useHistory();
+  const { SelectADay } = useContext(userContext);
 
   const handleDayClick = day => {
-    history.push(`/directory/${dateFormat(day, "dd-mm-yyyy")}`);
+    history.push(`/day/${dateFormat(day, "d mmmm yyyy")}`);
+    SelectADay(day);
   };
 
   return (
     <div className="calendar-page">
-      <TopBar text={"CalendarMonthsPage"} />
+      <TopBar text={"Calendar Months Page"} />
       <div className="calendar-main-content">
         <Calendar locale="eng" onClickDay={handleDayClick} />
       </div>
