@@ -25,6 +25,7 @@ export default function Task({ id, task }) {
       setTimeValue(time);
       setActionValue(action);
     }
+    //eslint-disable-next-line
   }, [task]);
 
   const onUpdate = () => {

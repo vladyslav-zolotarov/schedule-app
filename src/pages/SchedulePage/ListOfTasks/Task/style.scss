@@ -8,17 +8,17 @@
   margin: 15px 100px;
   height: 40px;
   background-color: $color-white;
-  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
   //animation: .6s ease-in-out both animation-2;
-
 
   .time-picker {
     min-width: 100px;
     border-right: 2px solid $color-gray-2;
     font-size: medium;
 
-    .input-picker{
+    .input-picker {
       border-bottom: 1px solid $color-gray-2;
       -webkit-appearance: none;
 
@@ -31,8 +31,7 @@
         margin: 0;
       }
 
-
-      &:hover{
+      &:hover {
         border-bottom: 1px solid black;
       }
 
@@ -41,8 +40,6 @@
         border-bottom: 2px solid $color-blue;
       }
     }
-
-
   }
 
   .task-input {
@@ -55,7 +52,7 @@
 
     //border-right: 2px solid $color-gray-2;
 
-    &:hover{
+    &:hover {
       border-bottom: 1px solid black;
     }
 
@@ -112,7 +109,6 @@
     border-left: 2px solid $color-gray-2;
     padding-left: 10px;
 
-
     button {
       width: 50%;
       height: 90%;
@@ -138,7 +134,7 @@
     }
   }
 
-  .task-time-value{
+  .task-time-value {
     min-width: 89px;
     display: flex;
     align-items: center;
@@ -148,11 +144,11 @@
     padding-left: 11px;
   }
 
-  .task-action-value{
+  .task-action-value {
     width: 100%;
     padding: 0 10px;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     font-size: medium;
   }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './style.scss';
 import { FaTrashAlt } from 'react-icons/all';
 import { userContext } from '../../utils/context';

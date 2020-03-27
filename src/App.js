@@ -13,12 +13,15 @@ import ReportPage from 'pages/ReportPage';
 import dateFormat from 'dateformat/lib/dateformat';
 import ReportTask from './pages/ReportPage/ReportTask';
 import { v4 } from 'uuid';
+import { useAlert } from './utils/alertContext';
+import AlertBox from './components/AlertBox';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedReportDay, setSelectedReportDay] = useState('');
   // const [countTasks, setCountTasks] = useState(0);
+  const alertFunctions = useAlert();
 
   const selectADay = (day) => {
     if (day !== '') {
@@ -88,7 +91,6 @@ export default function App() {
     <userContext.Provider
       value={{
         addNewTask,
-        // addTaskBar,
         selectedDay,
         tasks,
         selectADay,
@@ -97,15 +99,13 @@ export default function App() {
         onSelectReportDay,
         selectedReportDay,
         removeTasksOfDate,
-        // refactorTasks,
-        // countTasks,
-        // setCountTasks,
-        // onCountTasks,
+        alertFunctions,
       }}
     >
       <div className="App">
         <BrowserRouter history={history}>
           <Menu />
+          <AlertBox alerts={alertFunctions.alerts} />
           {selectedDay === '' ? <Redirect to={'/'} /> : null}
           <Switch>
             <Route exact path="/">

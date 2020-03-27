@@ -11,8 +11,6 @@
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   margin: 20px;
 
-
-
   .card-content {
     height: 65%;
     display: flex;
@@ -20,10 +18,8 @@
     background-color: $color-white;
     border-radius: 5px;
     padding: 20px;
-    align-items: end;
+    align-items: flex-end;
     border-bottom: 1px solid $color-gray;
-
-
 
     .card-head {
       margin-bottom: 5px;
@@ -37,7 +33,6 @@
     height: 35%;
     border-radius: 5px;
     background-color: $color-white;
-
 
     .card-butt-1 {
       width: 80%;
@@ -55,7 +50,6 @@
         width: 30%;
         margin: 0 10px;
         color: $color-blue;
-
 
         &:hover {
           cursor: pointer;

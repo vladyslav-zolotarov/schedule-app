@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import TopBar from 'components/TopBar';
 import Card from '../../components/Card';
 import './style.scss';
