@@ -1,16 +1,14 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-import './style.scss'
+import './style.scss';
 
-export default function AddButton() {
+export default function AddButton({ onClick }) {
   return (
-    <>
-      <button className="button-add">
-        <FontAwesomeIcon icon={faPlusCircle} size="2x" color="gray" />
-        <p>Add new task</p>
-      </button>
-    </>
-  )
+    <div onClick={onClick} className="button-add">
+      <FontAwesomeIcon icon={faPlusCircle} size="2x" color="gray" />
+      <p>Add new task</p>
+    </div>
+  );
 }

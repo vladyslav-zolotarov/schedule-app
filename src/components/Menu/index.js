@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import {
   FaCalendarAlt,
   GiBison,
   FaChartLine,
   FaQuestionCircle,
-} from 'react-icons/all'
-import './style.scss'
-import { Link } from 'react-router-dom'
+} from 'react-icons/all';
+import './style.scss';
+import { Link } from 'react-router-dom';
 
 export default function Menu() {
   return (
@@ -28,5 +28,5 @@ export default function Menu() {
         <FaQuestionCircle className="menu-icon" />
       </div>
     </div>
-  )
+  );
 }

@@ -9,9 +9,12 @@
   width: 280px;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  margin: 20px;
+
+
 
   .card-content {
-    height: 60%;
+    height: 65%;
     display: flex;
     flex-direction: column;
     background-color: $color-white;
@@ -19,6 +22,8 @@
     padding: 20px;
     align-items: end;
     border-bottom: 1px solid $color-gray;
+
+
 
     .card-head {
       margin-bottom: 5px;
@@ -29,9 +34,10 @@
     display: flex;
     //justify-content: center;
     align-items: center;
-    height: 40%;
+    height: 35%;
     border-radius: 5px;
     background-color: $color-white;
+
 
     .card-butt-1 {
       width: 80%;
@@ -42,11 +48,14 @@
       .card-butt {
         font-size: medium;
         font-family: $main-font;
+        font-weight: 800;
         border: 0;
         border-radius: 5px;
         height: 70%;
         width: 30%;
         margin: 0 10px;
+        color: $color-blue;
+
 
         &:hover {
           cursor: pointer;

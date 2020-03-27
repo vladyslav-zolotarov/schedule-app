@@ -6,8 +6,12 @@
   height: 100vh;
   font-family: $main-font;
   background-color: $color-light-gray;
+
+
+
   .report-main-content {
     padding: 40px 20px 20px 20px;
+    display: flex;
 
     .report-table {
       margin-top: 20px;
@@ -48,5 +52,14 @@
         }
       }
     }
+  }
+
+  .report-main-content-welcome{
+    //background-color: $color-white;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $color-gray;
   }
 }

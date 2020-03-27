@@ -9,6 +9,8 @@ abbr {
   height: 100vh;
   font-family: $main-font;
   background-color: $color-light-gray;
+  //animation: .3s ease-in-out both fade-in;
+
 }
 
 .calendar-main-content {
@@ -26,6 +28,7 @@ abbr {
 .react-calendar {
   background-color: $color-white;
   box-shadow: 1px 1px 12px 1px #c0c0c0;
+  animation: .6s ease-in-out both animation-1;
 
   .react-calendar__tile--now {
     background-color: $color-light-gray-2 !important;

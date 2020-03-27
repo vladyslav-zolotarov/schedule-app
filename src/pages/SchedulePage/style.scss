@@ -12,6 +12,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation: .4s ease-in-out both animation-2;
+
+  }
+
+  .schedule-main-content-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
   }
 
   .schedule-text {

@@ -8,22 +8,60 @@
   margin: 15px 100px;
   height: 40px;
   background-color: $color-white;
-  box-shadow: 4px -3px 9px -6px #c0c0c0;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  border-radius: 5px;
+  //animation: .6s ease-in-out both animation-2;
+
 
   .time-picker {
-    //width: 10%;
-    border-right: 2px solid $color-light-gray;
-  }
-  .task-input {
-    width: 80%;
-    font-family: $main-font;
+    min-width: 100px;
+    border-right: 2px solid $color-gray-2;
     font-size: medium;
-    padding: 5px 10px;
+
+    .input-picker{
+      border-bottom: 1px solid $color-gray-2;
+      -webkit-appearance: none;
+
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+      }
+
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+
+      &:hover{
+        border-bottom: 1px solid black;
+      }
+
+      &:focus {
+        outline: none;
+        border-bottom: 2px solid $color-blue;
+      }
+    }
+
+
+  }
+
+  .task-input {
+    width: 100%;
+    font-family: $main-font;
+    margin: 0 10px;
     border: 0;
-    border-right: 2px solid $color-light-gray;
+    font-size: medium;
+    border-bottom: 1px solid $color-gray-2;
+
+    //border-right: 2px solid $color-gray-2;
+
+    &:hover{
+      border-bottom: 1px solid black;
+    }
 
     &:focus {
       outline: none;
+      border-bottom: 2px solid $color-blue;
     }
 
     &::placeholder {
@@ -32,22 +70,90 @@
     }
   }
 
-  .task-butt {
-    width: 10%;
-    border: 0;
-    font-family: $main-font;
+  .action-butt-group-1 {
+    display: flex;
+    min-width: 100px;
+    justify-content: center;
+    align-items: center;
+    border-left: 2px solid $color-gray-2;
+    padding-left: 10px;
+
+    button {
+      width: 50%;
+      height: 90%;
+      border: 0;
+      font-family: $main-font;
+
+      svg {
+        height: 25px;
+        width: 25px;
+      }
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+
+        //color: $color-gray-2;
+        //background-color: $color-gray;
+        //border-radius: 20px;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .action-butt-group-2 {
+    display: flex;
+    min-width: 100px;
+    justify-content: center;
+    align-items: center;
+    border-left: 2px solid $color-gray-2;
+    padding-left: 10px;
+
+
+    button {
+      width: 50%;
+      height: 90%;
+      border: 0;
+      font-family: $main-font;
+
+      svg {
+        height: 16px;
+        width: 16px;
+      }
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+
+        //background-color: $color-gray;
+        //border-radius: 20px;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .task-time-value{
+    min-width: 89px;
+    display: flex;
+    align-items: center;
+    border-right: 2px solid $color-gray-2;
     font-size: medium;
+    font-family: $main-font;
+    padding-left: 11px;
+  }
 
-    &:hover {
-      cursor: pointer;
-      background-color: $color-gray;
-    }
-
-    &:focus {
-      outline: none;
-      //background-color: $color-light-green;
-      //color: $color-white;
-      transition: ease 0.5s;
-    }
+  .task-action-value{
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: medium;
   }
 }

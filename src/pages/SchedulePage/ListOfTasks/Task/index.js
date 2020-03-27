@@ -1,56 +1,110 @@
-import React, { useContext, useState } from 'react'
-import './style.scss'
-import 'components/TimePicker/style.scss'
-import { FaTrashAlt } from 'react-icons/all'
+import React, { useContext, useEffect, useState } from 'react';
+import './style.scss';
+import 'components/TimePicker/style.scss';
+import {
+  FaTrashAlt,
+  FaPen,
+  IoIosCheckmarkCircle,
+  IoIosCloseCircle,
+} from 'react-icons/all';
 
-import { userContext } from 'utils/context'
+import { userContext } from 'utils/context';
 
-export default function Task({ id }) {
-  const [actionValue, setActionValue] = useState('')
-  const [timeValue, setTimeValue] = useState('')
-  const [disableValue, setDisableValue] = useState(false)
+export default function Task({ id, task }) {
+  const [actionValue, setActionValue] = useState('');
+  const [timeValue, setTimeValue] = useState('');
+  const [edit, setEdit] = useState(false);
 
-  const { addNewTask, updateNewTask } = useContext(userContext)
+  const { removeTask, updateNewTask } = useContext(userContext);
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    if (timeValue !== '' && actionValue !== '') {
-      updateNewTask(id, timeValue, actionValue)
-      setDisableValue(true)
+  const time = task?.task?.time;
+  const action = task?.task?.action;
+
+  useEffect(() => {
+    if (time && action) {
+      setTimeValue(time);
+      setActionValue(action);
     }
-  }
+  }, [task]);
 
-  return (
-    <form className="task-main-content">
-      <div className="time-picker">
-        <input
-          disabled={disableValue}
-          value={timeValue}
-          onChange={(e) => setTimeValue(e.target.value)}
-          className="input-picker"
-          placeholder="ww"
-          type="time"
-        />
+  const onUpdate = () => {
+    updateNewTask(id, timeValue, actionValue);
+    setEdit(false);
+  };
+
+  const onRemove = (e) => {
+    e.preventDefault();
+    removeTask(id);
+  };
+
+  const handleCancel = () => {
+    setActionValue(action);
+    setTimeValue(time);
+    setEdit(false);
+  };
+
+  const updateAndDelete = () => {
+    return (
+      <div className="action-butt-group-2">
+        <button
+          type="button"
+          className="task-butt"
+          onClick={() => setEdit(true)}
+        >
+          <FaPen />
+        </button>
+        <button
+          type="submit"
+          className="task-butt"
+          onClick={(e) => onRemove(e)}
+        >
+          <FaTrashAlt />
+        </button>
       </div>
-      <input
-        disabled={disableValue}
-        value={actionValue}
-        onChange={(e) => setActionValue(e.target.value)}
-        className="task-input"
-        type="text"
-        placeholder="Input task"
-      />
-      <button
-        type="submit"
-        className="task-butt"
-        disabled={disableValue}
-        onClick={(e) => onSubmit(e)}
-      >
-        Add
-      </button>
-      <button type="submit" className="task-butt" onClick={(e) => onSubmit(e)}>
-        <FaTrashAlt />
-      </button>
-    </form>
-  )
+    );
+  };
+
+  const acceptAndDelete = () => {
+    return (
+      <div className="action-butt-group-1">
+        <button type="button" className="task-butt" onClick={onUpdate}>
+          <IoIosCheckmarkCircle />
+        </button>
+        <button type="submit" className="task-butt" onClick={handleCancel}>
+          <IoIosCloseCircle />
+        </button>
+      </div>
+    );
+  };
+
+  if (edit) {
+    return (
+      <form className="task-main-content">
+        <div className="time-picker">
+          <input
+            required
+            value={timeValue}
+            onChange={(e) => setTimeValue(e.target.value)}
+            className="input-picker"
+            type="time"
+          />
+        </div>
+        <input
+          value={actionValue}
+          onChange={(e) => setActionValue(e.target.value)}
+          className="task-input"
+          type="text"
+          placeholder="Input task"
+        />
+        {acceptAndDelete()}
+      </form>
+    );
+  }
+  return (
+    <div className="task-main-content">
+      <div className="task-time-value">{timeValue}</div>
+      <div className="task-action-value">{actionValue}</div>
+      {updateAndDelete()}
+    </div>
+  );
 }

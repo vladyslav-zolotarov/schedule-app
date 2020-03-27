@@ -1,6 +1,6 @@
-import React from 'react'
-import { FaUserCircle } from 'react-icons/all'
-import './style.scss'
+import React from 'react';
+import { FaUserCircle } from 'react-icons/all';
+import './style.scss';
 
 export default function TopBar({ text }) {
   return (
@@ -12,5 +12,5 @@ export default function TopBar({ text }) {
         <p>User Name</p>
       </div>
     </div>
-  )
+  );
 }
