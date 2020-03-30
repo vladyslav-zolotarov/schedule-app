@@ -23,24 +23,24 @@ export default function ReportPage() {
 
   const newCards = cards?.filter((c) => c !== null);
 
-  const contentWelcome = () => {
-    return (
-      <div className={'report-main-content-welcome'}>
-        <h1>At first create a tasks</h1>
-      </div>
-    );
-  };
-
   const content = () => {
     if (newCards?.length > 0) {
-      return <div className="report-main-content">{cards}</div>;
-    } else return <>{contentWelcome()}</>;
+      return (
+        <div className="report-page">
+          <TopBar text={'Report page'} />
+          <div className="report-main-content">{cards}</div>
+        </div>
+      );
+    } else
+      return (
+        <div className="report-page-welcome">
+          <TopBar text={'Report page'} />
+          <div className={'report-main-content-welcome'}>
+            <h1>At first create a tasks</h1>
+          </div>
+        </div>
+      );
   };
 
-  return (
-    <div className="report-page">
-      <TopBar text={'Report page'} />
-      {content()}
-    </div>
-  );
+  return <>{content()}</>;
 }

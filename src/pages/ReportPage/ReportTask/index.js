@@ -11,7 +11,7 @@ export default function ReportTask() {
 
   const gotTasks = tasks.gotTask;
 
-  const contentTable = gotTasks.map((tasks, index) => {
+  const contentTable = gotTasks?.map((tasks, index) => {
     if (
       tasks.date === selectedReportDay &&
       tasks.task.time !== '' &&

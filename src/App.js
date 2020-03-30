@@ -28,11 +28,19 @@ export default function App() {
 
   // useEffect(() => history.push('/'), []);
 
-  useEffect(() => {
-    axios.get(`${serverUrl}/tasks`).then((res) => {
-      const task = res.data;
-      setTasks({ gotTask: task });
-    });
+  useEffect(async () => {
+    // axios.get(`${serverUrl}/tasks`).then((res) => {
+    //   const task = res.data;
+    //   setTasks({ gotTask: task });
+    // });
+    try {
+      await axios.get(`${serverUrl}/tasks`).then((res) => {
+        const task = res.data;
+        setTasks({ gotTask: task });
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }, [tasks]);
 
   const selectADay = (day) => {
