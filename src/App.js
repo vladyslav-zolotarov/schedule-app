@@ -44,33 +44,28 @@ export default function App() {
     }
   };
 
-  const addNewTask = (time, action) => {
+  const addNewTask = async (time, action) => {
     if (selectedDay) {
-      // setTasks([
-      //   ...tasks,
-      //   {
-      //     id: v4(),
-      //     date: selectedDay,
-      //     task: {
-      //       time,
-      //       action,
-      //     },
-      //   },
-      // ]);
       const task = {
         time,
         action,
       };
-      axios
-        .post(`${serverUrl}/tasks`, { id: v4(), date: selectedDay, task })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+
+      try {
+        await axios.post(`${serverUrl}/tasks`, {
+          id: v4(),
+          date: selectedDay,
+          task,
+        });
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
   const updateNewTask = (id, time, action) => {
     if (selectedDay) {
-      tasks.gotTask.map((t) => {
+      tasks.gotTask.forEach((t) => {
         if (t.id === id) {
           t = { id, date: selectedDay, task: { time, action } };
           axios
@@ -90,7 +85,7 @@ export default function App() {
   };
 
   const removeTasksOfDate = (date) => {
-    tasks.gotTask.map((t) => {
+    tasks.gotTask.forEach((t) => {
       if (t.date === date) {
         axios
           .delete(`${serverUrl}/tasks/${t.id}`)
@@ -124,7 +119,7 @@ export default function App() {
           <Menu />
           {/*<Redirect to={'/'} />*/}
           <AlertBox alerts={alertFunctions.alerts} />
-          {/*{selectedDay === '' || selectedDay ? <Redirect to={'/'} /> : null}*/}
+          {selectedDay === '' || !selectedDay ? <Redirect to={'/'} /> : null}
           <Switch>
             <Route exact path="/">
               <CalendarMonthsPage />

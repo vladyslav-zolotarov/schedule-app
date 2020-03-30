@@ -9,7 +9,7 @@ export default function ListOfTasks({ task, setTask }) {
 
   const gotTasks = tasks.gotTask;
 
-  const content = gotTasks.map((task, index) => {
+  const content = gotTasks?.map((task, index) => {
     if (task.date === selectedDay) {
       return (
         <li key={index}>

@@ -9,19 +9,19 @@ export default function ReportPage() {
 
   const gotTasks = tasks.gotTask;
 
-  const dates = gotTasks.filter((item, index, array) => {
+  const dates = gotTasks?.filter((item, index, array) => {
     return (
       array.map((mapItem) => mapItem['date']).indexOf(item['date']) === index
     );
   });
 
-  const cards = dates.map((task, index) => {
+  const cards = dates?.map((task, index) => {
     if (task.task.time !== '' && task.task.action !== '') {
       return <Card key={index} task={task} />;
     } else return null;
   });
 
-  const newCards = cards.filter((c) => c !== null);
+  const newCards = cards?.filter((c) => c !== null);
 
   const contentWelcome = () => {
     return (
@@ -32,7 +32,7 @@ export default function ReportPage() {
   };
 
   const content = () => {
-    if (newCards.length > 0) {
+    if (newCards?.length > 0) {
       return <div className="report-main-content">{cards}</div>;
     } else return <>{contentWelcome()}</>;
   };
