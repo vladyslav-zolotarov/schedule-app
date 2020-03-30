@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import { history } from 'utils/history';
-import axios from 'axios';
 
 import './style.scss';
 
@@ -13,21 +12,25 @@ import { userContext } from 'utils/context';
 import ReportPage from 'pages/ReportPage';
 import dateFormat from 'dateformat/lib/dateformat';
 import ReportTask from './pages/ReportPage/ReportTask';
-import { v4 } from 'uuid';
 import { useAlert } from './utils/alertContext';
 import AlertBox from './components/AlertBox';
+import {
+  getTasks,
+  createTask,
+  deleteTask,
+  updateTaskAction,
+} from './api/endpoints';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedReportDay, setSelectedReportDay] = useState('');
   const alertFunctions = useAlert();
-  const serverUrl = 'http://localhost:8000';
 
   useEffect(() => {
     (async () => {
       try {
-        const res = await axios.get(`${serverUrl}/tasks`);
+        const res = await getTasks();
         setTasks(res.data);
       } catch (e) {
         console.error(e);
@@ -52,11 +55,7 @@ export default function App() {
       };
 
       try {
-        const { data } = await axios.post(`${serverUrl}/tasks`, {
-          id: v4(),
-          date: selectedDay,
-          task,
-        });
+        const { data } = await createTask(task, selectedDay);
         setTasks([...tasks, data]);
       } catch (e) {
         console.error(e);
@@ -67,11 +66,8 @@ export default function App() {
   const updateTask = async (id, time, action) => {
     if (selectedDay) {
       try {
-        await axios.put(`${serverUrl}/tasks/${id}`, {
-          date: selectedDay,
-          task: { time, action },
-        });
-        const res = await axios.get(`${serverUrl}/tasks`);
+        await updateTaskAction(id, selectedDay, { time, action });
+        const res = await getTasks();
         setTasks(res.data);
       } catch (e) {
         console.error(e);
@@ -81,7 +77,7 @@ export default function App() {
 
   const removeTask = async (id) => {
     try {
-      await axios.delete(`${serverUrl}/tasks/${id}`);
+      await deleteTask(id);
       setTasks(tasks.filter((task) => task.id !== id));
     } catch (e) {
       console.error(e);
@@ -92,7 +88,7 @@ export default function App() {
     tasks.forEach(async (t) => {
       if (t.date === date) {
         try {
-          await axios.delete(`${serverUrl}/tasks/${t.id}`);
+          await deleteTask(t.id);
           setTasks(tasks.filter((task) => task.date !== date));
         } catch (e) {
           console.error(e);

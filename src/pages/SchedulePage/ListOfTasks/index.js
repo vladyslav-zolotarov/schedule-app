@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { useContext, useCallback } from 'react';
 import Task from './Task';
 import './style.scss';
 import { userContext } from 'utils/context';
