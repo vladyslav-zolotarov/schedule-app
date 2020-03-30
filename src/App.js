@@ -49,13 +49,8 @@ export default function App() {
 
   const addNewTask = async (time, action) => {
     if (selectedDay) {
-      const task = {
-        time,
-        action,
-      };
-
       try {
-        const { data } = await createTask(task, selectedDay);
+        const { data } = await createTask(selectedDay, time, action);
         setTasks([...tasks, data]);
       } catch (e) {
         console.error(e);
@@ -66,7 +61,7 @@ export default function App() {
   const updateTask = async (id, time, action) => {
     if (selectedDay) {
       try {
-        await updateTaskAction(id, selectedDay, { time, action });
+        await updateTaskAction(id, selectedDay, time, action);
         const res = await getTasks();
         setTasks(res.data);
       } catch (e) {

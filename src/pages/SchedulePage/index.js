@@ -14,24 +14,25 @@ export default function SchedulePage() {
     addNewTask,
     alertFunctions: { createAlert },
   } = useContext(userContext);
-  const [task, setTask] = useState({ time: '', action: '' });
+  const [time, setTime] = useState('');
+  const [action, setAction] = useState('');
 
   const handleAdd = () => {
-    if (!task.action && !task.time) {
+    if (!action && !time) {
       return createAlert({
         id: v4(),
         title: 'You must provide task action and task time',
         alertType: ALERT_ERROR,
       });
     }
-    if (!task.time) {
+    if (!time) {
       return createAlert({
         id: v4(),
         title: 'You must provide task time',
         alertType: ALERT_ERROR,
       });
     }
-    if (!task.action) {
+    if (!action) {
       return createAlert({
         id: v4(),
         title: 'You must provide task action',
@@ -43,9 +44,11 @@ export default function SchedulePage() {
       title: 'Task successfully created',
       alertType: ALERT_SUCCESS,
     });
-    addNewTask(task.time, task.action);
 
-    setTask({ time: '', action: '' });
+    addNewTask(time, action);
+
+    setTime('');
+    setAction('');
   };
 
   return (
@@ -53,7 +56,12 @@ export default function SchedulePage() {
       <TopBar text={'SchedulePage'} />
       <div className="schedule-main-content">
         <div className="schedule-text">{selectedDay}</div>
-        <ListOfTasks task={task} setTask={setTask} />
+        <ListOfTasks
+          action={action}
+          time={time}
+          setTime={setTime}
+          setAction={setAction}
+        />
         <AddButton onClick={handleAdd} />
       </div>
     </div>

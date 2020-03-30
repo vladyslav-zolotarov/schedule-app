@@ -5,11 +5,12 @@ export const getTasks = async () => {
   return await api.get('/tasks');
 };
 
-export const createTask = async (task, date) => {
+export const createTask = async (date, time, action) => {
   return await api.post('/tasks', {
     id: v4(),
     date,
-    task,
+    time,
+    action,
   });
 };
 
@@ -17,9 +18,10 @@ export const deleteTask = async (id) => {
   return await api.delete(`/tasks/${id}`);
 };
 
-export const updateTaskAction = async (id, date, task) => {
+export const updateTaskAction = async (id, date, time, action) => {
   return await api.put(`/tasks/${id}`, {
     date,
-    task,
+    time,
+    action,
   });
 };

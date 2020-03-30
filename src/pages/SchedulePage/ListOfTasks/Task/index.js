@@ -23,8 +23,8 @@ export default function Task({ id, task }) {
     alertFunctions: { createAlert },
   } = useContext(userContext);
 
-  const time = task?.task?.time;
-  const action = task?.task?.action;
+  const time = task?.time;
+  const action = task?.action;
 
   useEffect(() => {
     if (time && action) {

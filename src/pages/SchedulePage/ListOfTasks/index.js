@@ -4,7 +4,7 @@ import './style.scss';
 import { userContext } from 'utils/context';
 import NewTask from './NewTask';
 
-export default function ListOfTasks({ task, setTask }) {
+export default function ListOfTasks({ action, time, setAction, setTime }) {
   const { selectedDay, tasks } = useContext(userContext);
 
   const content = useCallback(() => {
@@ -23,7 +23,12 @@ export default function ListOfTasks({ task, setTask }) {
     <ul className="list-of-task-main-content">
       {content()}
       <li>
-        <NewTask task={task} setTask={setTask} />
+        <NewTask
+          action={action}
+          time={time}
+          setTime={setTime}
+          setAction={setAction}
+        />
       </li>
     </ul>
   );

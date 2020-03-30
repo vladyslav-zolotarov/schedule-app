@@ -22,6 +22,7 @@
   text-align: center;
   font-family: $main-font;
   background-color: $color-light-gray;
+  min-height: 100vh;
 
   .report-main-content {
     display: flex;

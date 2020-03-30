@@ -14,7 +14,7 @@ export default function ReportPage() {
   });
 
   const cards = dates?.map((task, index) => {
-    if (task.task.time !== '' && task.task.action !== '') {
+    if (task?.time !== '' && task?.action !== '') {
       return <Card key={index} task={task} />;
     } else return null;
   });

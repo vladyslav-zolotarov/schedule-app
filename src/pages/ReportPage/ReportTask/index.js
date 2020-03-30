@@ -1,24 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import './style.scss';
 
 import { userContext } from '../../../utils/context';
 import TopBar from '../../../components/TopBar';
 import { FaTrashAlt } from 'react-icons/all';
+import { useHistory } from 'react-router-dom';
 
 export default function ReportTask() {
   const { tasks, removeTask, selectedReportDay } = useContext(userContext);
+  const history = useHistory();
 
   const contentTable = tasks?.map((tasks, index) => {
     if (
-      tasks.date === selectedReportDay &&
-      tasks.task.time !== '' &&
-      tasks.task.action !== ''
+      tasks?.date === selectedReportDay &&
+      tasks?.time !== '' &&
+      tasks?.action !== ''
     ) {
       return (
         <tr key={index}>
-          <td>{tasks?.task?.time}</td>
-          <td>{tasks?.task?.action}</td>
+          <td>{tasks?.time}</td>
+          <td>{tasks?.action}</td>
           <td>
             <button
               className="report-page-butt"
@@ -31,6 +33,14 @@ export default function ReportTask() {
       );
     } else return null;
   });
+
+  useEffect(() => {
+    if (contentTable.find((t) => t !== null) === undefined) {
+      setTimeout(() => {
+        return history.push('/report');
+      }, 200);
+    }
+  }, [tasks]);
 
   return (
     <div className="report-page">
