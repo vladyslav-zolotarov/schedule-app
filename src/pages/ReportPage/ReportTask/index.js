@@ -9,9 +9,7 @@ import { FaTrashAlt } from 'react-icons/all';
 export default function ReportTask() {
   const { tasks, removeTask, selectedReportDay } = useContext(userContext);
 
-  const gotTasks = tasks.gotTask;
-
-  const contentTable = gotTasks?.map((tasks, index) => {
+  const contentTable = tasks?.map((tasks, index) => {
     if (
       tasks.date === selectedReportDay &&
       tasks.task.time !== '' &&

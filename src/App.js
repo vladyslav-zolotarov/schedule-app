@@ -28,20 +28,18 @@ export default function App() {
 
   // useEffect(() => history.push('/'), []);
 
-  useEffect(async () => {
-    // axios.get(`${serverUrl}/tasks`).then((res) => {
-    //   const task = res.data;
-    //   setTasks({ gotTask: task });
-    // });
-    try {
-      await axios.get(`${serverUrl}/tasks`).then((res) => {
-        const task = res.data;
-        setTasks({ gotTask: task });
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  }, [tasks]);
+  useEffect(() => {
+    (async () => {
+      try {
+        await axios.get(`${serverUrl}/tasks`).then((res) => {
+          const tasks = res.data;
+          setTasks(tasks);
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, []);
 
   const selectADay = (day) => {
     if (day !== '') {
@@ -60,11 +58,12 @@ export default function App() {
       };
 
       try {
-        await axios.post(`${serverUrl}/tasks`, {
+        const { data } = await axios.post(`${serverUrl}/tasks`, {
           id: v4(),
           date: selectedDay,
           task,
         });
+        setTasks([...tasks, data]);
       } catch (e) {
         console.error(e);
       }
@@ -73,7 +72,7 @@ export default function App() {
 
   const updateNewTask = (id, time, action) => {
     if (selectedDay) {
-      tasks.gotTask.forEach((t) => {
+      tasks.forEach((t) => {
         if (t.id === id) {
           t = { id, date: selectedDay, task: { time, action } };
           axios
@@ -93,7 +92,7 @@ export default function App() {
   };
 
   const removeTasksOfDate = (date) => {
-    tasks.gotTask.forEach((t) => {
+    tasks.forEach((t) => {
       if (t.date === date) {
         axios
           .delete(`${serverUrl}/tasks/${t.id}`)

@@ -7,9 +7,7 @@ import { userContext } from 'utils/context';
 export default function ReportPage() {
   const { tasks } = useContext(userContext);
 
-  const gotTasks = tasks.gotTask;
-
-  const dates = gotTasks?.filter((item, index, array) => {
+  const dates = tasks?.filter((item, index, array) => {
     return (
       array.map((mapItem) => mapItem['date']).indexOf(item['date']) === index
     );

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import Task from './Task';
 import './style.scss';
 import { userContext } from 'utils/context';
@@ -7,21 +7,23 @@ import NewTask from './NewTask';
 export default function ListOfTasks({ task, setTask }) {
   const { selectedDay, tasks } = useContext(userContext);
 
-  const gotTasks = tasks.gotTask;
+  console.log(tasks);
 
-  const content = gotTasks?.map((task, index) => {
-    if (task.date === selectedDay) {
-      return (
-        <li key={index}>
-          <Task id={task.id} task={task} />
-        </li>
-      );
-    } else return null;
-  });
+  const content = useCallback(() => {
+    return tasks?.map((task) => {
+      if (task.date === selectedDay) {
+        return (
+          <li key={task.id}>
+            <Task id={task.id} task={task} />
+          </li>
+        );
+      }
+    });
+  }, [selectedDay, tasks]);
 
   return (
     <ul className="list-of-task-main-content">
-      {content}
+      {content()}
       <li>
         <NewTask task={task} setTask={setTask} />
       </li>
