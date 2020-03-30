@@ -24,17 +24,11 @@ export default function App() {
   const alertFunctions = useAlert();
   const serverUrl = 'http://localhost:8000';
 
-  // let history = useHistory();
-
-  // useEffect(() => history.push('/'), []);
-
   useEffect(() => {
     (async () => {
       try {
-        await axios.get(`${serverUrl}/tasks`).then((res) => {
-          const tasks = res.data;
-          setTasks(tasks);
-        });
+        const res = await axios.get(`${serverUrl}/tasks`);
+        setTasks(res.data);
       } catch (e) {
         console.error(e);
       }
@@ -70,26 +64,18 @@ export default function App() {
     }
   };
 
-  const updateNewTask = (id, time, action) => {
+  const updateTask = async (id, time, action) => {
     if (selectedDay) {
-      const updatedTasks = tasks.map((t) => {
-        if (t.id === id) {
-          return (t = { id, date: selectedDay, task: { time, action } });
-        }
-        return t;
-      });
-
-      tasks.forEach(async (t) => {
-        if (t.id === id) {
-          t = { id, date: selectedDay, task: { time, action } };
-          try {
-            await axios.put(`${serverUrl}/tasks/${id}`, t);
-            setTasks(updatedTasks);
-          } catch (e) {
-            console.error(e);
-          }
-        }
-      });
+      try {
+        await axios.put(`${serverUrl}/tasks/${id}`, {
+          date: selectedDay,
+          task: { time, action },
+        });
+        const res = await axios.get(`${serverUrl}/tasks`);
+        setTasks(res.data);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
@@ -125,7 +111,7 @@ export default function App() {
     tasks,
     selectADay,
     removeTask,
-    updateNewTask,
+    updateNewTask: updateTask,
     onSelectReportDay,
     selectedReportDay,
     removeTasksOfDate,
@@ -137,7 +123,6 @@ export default function App() {
       <div className="App">
         <Router history={history}>
           <Menu />
-          {/*<Redirect to={'/'} />*/}
           <AlertBox alerts={alertFunctions.alerts} />
           {selectedDay === '' || !selectedDay ? <Redirect to={'/'} /> : null}
           <Switch>

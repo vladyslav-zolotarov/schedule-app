@@ -8,7 +8,6 @@ export default function TopBar({ text }) {
       <h3>{text}</h3>
       <div className="user-content">
         <FaUserCircle className="top-bar-icon" />
-        {/*<FontAwesomeIcon icon={faUser} color="black" size="lg"/>*/}
         <p>User Name</p>
       </div>
     </div>
