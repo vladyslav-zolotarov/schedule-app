@@ -7,8 +7,6 @@ import NewTask from './NewTask';
 export default function ListOfTasks({ task, setTask }) {
   const { selectedDay, tasks } = useContext(userContext);
 
-  console.log(tasks);
-
   const content = useCallback(() => {
     return tasks?.map((task) => {
       if (task.date === selectedDay) {

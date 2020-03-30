@@ -72,32 +72,45 @@ export default function App() {
 
   const updateNewTask = (id, time, action) => {
     if (selectedDay) {
-      tasks.forEach((t) => {
+      const updatedTasks = tasks.map((t) => {
+        if (t.id === id) {
+          return (t = { id, date: selectedDay, task: { time, action } });
+        }
+        return t;
+      });
+
+      tasks.forEach(async (t) => {
         if (t.id === id) {
           t = { id, date: selectedDay, task: { time, action } };
-          axios
-            .put(`${serverUrl}/tasks/${id}`, t)
-            .then((res) => console.log(res.data))
-            .catch((error) => console.log(error));
+          try {
+            await axios.put(`${serverUrl}/tasks/${id}`, t);
+            setTasks(updatedTasks);
+          } catch (e) {
+            console.error(e);
+          }
         }
       });
     }
   };
 
-  const removeTask = (id) => {
-    axios
-      .delete(`${serverUrl}/tasks/${id}`)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+  const removeTask = async (id) => {
+    try {
+      await axios.delete(`${serverUrl}/tasks/${id}`);
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const removeTasksOfDate = (date) => {
-    tasks.forEach((t) => {
+    tasks.forEach(async (t) => {
       if (t.date === date) {
-        axios
-          .delete(`${serverUrl}/tasks/${t.id}`)
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err));
+        try {
+          await axios.delete(`${serverUrl}/tasks/${t.id}`);
+          setTasks(tasks.filter((task) => task.date !== date));
+        } catch (e) {
+          console.error(e);
+        }
       }
     });
   };
