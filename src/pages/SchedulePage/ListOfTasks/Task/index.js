@@ -9,13 +9,19 @@ import {
 } from 'react-icons/all';
 
 import { userContext } from 'utils/context';
+import { v4 } from 'uuid';
+import { ALERT_SUCCESS } from '../../../../utils/alertContext';
 
 export default function Task({ id, task }) {
   const [actionValue, setActionValue] = useState('');
   const [timeValue, setTimeValue] = useState('');
   const [edit, setEdit] = useState(false);
 
-  const { removeTask, updateNewTask } = useContext(userContext);
+  const {
+    removeTask,
+    updateNewTask,
+    alertFunctions: { createAlert },
+  } = useContext(userContext);
 
   const time = task?.task?.time;
   const action = task?.task?.action;
@@ -26,16 +32,26 @@ export default function Task({ id, task }) {
       setActionValue(action);
     }
     //eslint-disable-next-line
-  }, [task]);
+  }, []);
+
+  const alertShow = (title) => {
+    return createAlert({
+      id: v4(),
+      title,
+      alertType: ALERT_SUCCESS,
+    });
+  };
 
   const onUpdate = () => {
     updateNewTask(id, timeValue, actionValue);
     setEdit(false);
+    alertShow('Successful update task');
   };
 
   const onRemove = (e) => {
     e.preventDefault();
     removeTask(id);
+    alertShow('Successful delete task');
   };
 
   const handleCancel = () => {

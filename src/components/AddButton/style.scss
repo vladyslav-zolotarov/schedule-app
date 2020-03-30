@@ -14,6 +14,7 @@
   background-color: $color-light-green;
   box-shadow: -9px -4px 30px -13px #c0c0c0;
   animation: .6s ease-in-out both animation-1;
+  user-select: none;
 
 
   &:hover {

@@ -3,11 +3,25 @@ import './style.scss';
 import { FaTrashAlt } from 'react-icons/all';
 import { userContext } from '../../utils/context';
 import { useHistory } from 'react-router-dom';
+import { v4 } from 'uuid';
+import { ALERT_SUCCESS } from '../../utils/alertContext';
 
 export default function Card({ task }) {
   const date = task?.date;
-  const { onSelectReportDay, removeTasksOfDate } = useContext(userContext);
+  const {
+    onSelectReportDay,
+    removeTasksOfDate,
+    alertFunctions: { createAlert },
+  } = useContext(userContext);
   const history = useHistory();
+
+  const alertShow = (title) => {
+    return createAlert({
+      id: v4(),
+      title,
+      alertType: ALERT_SUCCESS,
+    });
+  };
 
   const onShow = () => {
     history.push(`report-day/${date}`);
@@ -16,6 +30,7 @@ export default function Card({ task }) {
 
   const removeCard = () => {
     removeTasksOfDate(date);
+    alertShow('Successful delete card with tasks');
   };
 
   const content = () => {

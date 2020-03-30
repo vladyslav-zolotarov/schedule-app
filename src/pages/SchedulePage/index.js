@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { userContext } from 'utils/context';
 import TopBar from 'components/TopBar';
 import AddButton from 'components/AddButton';
@@ -17,6 +17,13 @@ export default function SchedulePage() {
   const [task, setTask] = useState({ time: '', action: '' });
 
   const handleAdd = () => {
+    if (!task.action && !task.time) {
+      return createAlert({
+        id: v4(),
+        title: 'You must provide task action and task time',
+        alertType: ALERT_ERROR,
+      });
+    }
     if (!task.time) {
       return createAlert({
         id: v4(),

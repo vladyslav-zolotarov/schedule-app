@@ -7,7 +7,9 @@ import { userContext } from 'utils/context';
 export default function ReportPage() {
   const { tasks } = useContext(userContext);
 
-  const dates = tasks.filter((item, index, array) => {
+  const gotTasks = tasks.gotTask;
+
+  const dates = gotTasks.filter((item, index, array) => {
     return (
       array.map((mapItem) => mapItem['date']).indexOf(item['date']) === index
     );
@@ -20,8 +22,6 @@ export default function ReportPage() {
   });
 
   const newCards = cards.filter((c) => c !== null);
-
-  console.log('new', newCards);
 
   const contentWelcome = () => {
     return (

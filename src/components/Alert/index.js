@@ -1,28 +1,52 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   ALERT_SUCCESS,
   ALERT_DEFAULT,
   ALERT_ERROR,
 } from '../../utils/alertContext';
+import {
+  IoMdCheckmarkCircleOutline,
+  IoIosCloseCircleOutline,
+  AiOutlineExclamationCircle,
+} from 'react-icons/all';
+import './style.scss';
+import { userContext } from '../../utils/context';
 
-const style = {
-  color: 'white',
-  borderRadius: 5,
-  padding: '1rem',
-  marginTop: '0.5rem',
-};
+export const Alert = ({ id, title, type }) => {
+  const {
+    alertFunctions: { deleteAlert },
+  } = useContext(userContext);
 
-export const Alert = ({ title, type }) => {
   if (type === ALERT_SUCCESS) {
-    return <div style={{ backgroundColor: 'green', ...style }}>{title}</div>;
+    return (
+      <div className="success-alert">
+        <div className="success-alert-main">
+          <IoMdCheckmarkCircleOutline />
+          {title}
+        </div>
+        <button onClick={() => deleteAlert({ id })}>
+          <IoIosCloseCircleOutline />
+        </button>
+      </div>
+    );
   }
 
   if (type === ALERT_ERROR) {
-    return <div style={{ backgroundColor: 'red', ...style }}>{title}</div>;
+    return (
+      <div className="error-alert">
+        <div className="error-alert-main">
+          <AiOutlineExclamationCircle />
+          {title}
+        </div>
+        <button onClick={() => deleteAlert({ id })}>
+          <IoIosCloseCircleOutline />
+        </button>
+      </div>
+    );
   }
 
   if (type === ALERT_DEFAULT) {
-    return <div style={{ backgroundColor: 'gray', ...style }}>{title}</div>;
+    return <div>{title}</div>;
   }
 
   throw new TypeError('Provided type to Alert component is wrong');

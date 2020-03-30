@@ -14,7 +14,7 @@
 
 
   .new-time-picker {
-    width: 13%;
+    min-width: 100px;
     border-right: 2px solid $color-gray-2;
     font-size: medium;
     border-right: 2px solid $color-gray-2;
@@ -34,7 +34,7 @@
     }
   }
   .new-task-input {
-    width: 85%;
+    width: 100%;
     font-family: $main-font;
     margin: 0 1%;
     border: 0;

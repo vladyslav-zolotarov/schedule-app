@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import { history } from 'utils/history';
+import axios from 'axios';
 
 import './style.scss';
 
@@ -20,8 +21,19 @@ export default function App() {
   const [tasks, setTasks] = useState([]);
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedReportDay, setSelectedReportDay] = useState('');
-  // const [countTasks, setCountTasks] = useState(0);
   const alertFunctions = useAlert();
+  const serverUrl = 'http://localhost:8000';
+
+  // let history = useHistory();
+
+  // useEffect(() => history.push('/'), []);
+
+  useEffect(() => {
+    axios.get(`${serverUrl}/tasks`).then((res) => {
+      const task = res.data;
+      setTasks({ gotTask: task });
+    });
+  }, [tasks]);
 
   const selectADay = (day) => {
     if (day !== '') {
@@ -34,79 +46,85 @@ export default function App() {
 
   const addNewTask = (time, action) => {
     if (selectedDay) {
-      setTasks([
-        ...tasks,
-        {
-          id: v4(),
-          date: selectedDay,
-          task: {
-            time,
-            action,
-          },
-        },
-      ]);
+      // setTasks([
+      //   ...tasks,
+      //   {
+      //     id: v4(),
+      //     date: selectedDay,
+      //     task: {
+      //       time,
+      //       action,
+      //     },
+      //   },
+      // ]);
+      const task = {
+        time,
+        action,
+      };
+      axios
+        .post(`${serverUrl}/tasks`, { id: v4(), date: selectedDay, task })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
   };
 
   const updateNewTask = (id, time, action) => {
     if (selectedDay) {
-      const updatedTasks = tasks.map((t) => {
+      tasks.gotTask.map((t) => {
         if (t.id === id) {
-          return (t = { id, date: selectedDay, task: { time, action } });
+          t = { id, date: selectedDay, task: { time, action } };
+          axios
+            .put(`${serverUrl}/tasks/${id}`, t)
+            .then((res) => console.log(res.data))
+            .catch((error) => console.log(error));
         }
-        return t;
       });
-      setTasks(updatedTasks);
     }
   };
 
   const removeTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    axios
+      .delete(`${serverUrl}/tasks/${id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   const removeTasksOfDate = (date) => {
-    setTasks(tasks.filter((task) => task.date !== date));
+    tasks.gotTask.map((t) => {
+      if (t.date === date) {
+        axios
+          .delete(`${serverUrl}/tasks/${t.id}`)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+      }
+    });
   };
 
   const onSelectReportDay = (id) => {
     setSelectedReportDay(id);
   };
 
-  // const refactorTasks = (refactored) => {
-  //   setTasks(refactored);
-  // };
-
-  // const onCountTasks = (date) => {
-  //   tasks.map((task) => {
-  //     if (
-  //       task.date === date &&
-  //       task.task.time !== '' &&
-  //       task.task.action !== ''
-  //     )
-  //       setCountTasks(countTasks + 1);
-  //   });
-  // };
+  const userContextValues = {
+    addNewTask,
+    selectedDay,
+    tasks,
+    selectADay,
+    removeTask,
+    updateNewTask,
+    onSelectReportDay,
+    selectedReportDay,
+    removeTasksOfDate,
+    alertFunctions,
+  };
 
   return (
-    <userContext.Provider
-      value={{
-        addNewTask,
-        selectedDay,
-        tasks,
-        selectADay,
-        removeTask,
-        updateNewTask,
-        onSelectReportDay,
-        selectedReportDay,
-        removeTasksOfDate,
-        alertFunctions,
-      }}
-    >
+    <userContext.Provider value={userContextValues}>
       <div className="App">
-        <BrowserRouter history={history}>
+        <Router history={history}>
           <Menu />
+          {/*<Redirect to={'/'} />*/}
           <AlertBox alerts={alertFunctions.alerts} />
-          {selectedDay === '' ? <Redirect to={'/'} /> : null}
+          {/*{selectedDay === '' || selectedDay ? <Redirect to={'/'} /> : null}*/}
           <Switch>
             <Route exact path="/">
               <CalendarMonthsPage />
@@ -124,7 +142,7 @@ export default function App() {
               <ReportTask />
             </Route>
           </Switch>
-        </BrowserRouter>
+        </Router>
       </div>
     </userContext.Provider>
   );

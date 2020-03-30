@@ -7,7 +7,9 @@ import NewTask from './NewTask';
 export default function ListOfTasks({ task, setTask }) {
   const { selectedDay, tasks } = useContext(userContext);
 
-  const content = tasks.map((task, index) => {
+  const gotTasks = tasks.gotTask;
+
+  const content = gotTasks.map((task, index) => {
     if (task.date === selectedDay) {
       return (
         <li key={index}>

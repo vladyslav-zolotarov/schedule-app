@@ -9,6 +9,7 @@ $color-gray-2: #dcdcdcb5;
 $color-light-green: #4caf50;
 $color-green: #419644;
 $color-blue: #1976d2;
+$color-red: #e03333;
 
 %hover-calendar {
   cursor: pointer;
@@ -34,6 +35,6 @@ $color-blue: #1976d2;
 
   100%{
     transform: scale(1);
-    //margin-left: 0%;
+    margin-left: 0%;
   }
 }

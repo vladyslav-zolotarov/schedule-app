@@ -1,4 +1,7 @@
 import React, { useContext } from 'react';
+
+import './style.scss';
+
 import { userContext } from '../../../utils/context';
 import TopBar from '../../../components/TopBar';
 import { FaTrashAlt } from 'react-icons/all';
@@ -6,7 +9,9 @@ import { FaTrashAlt } from 'react-icons/all';
 export default function ReportTask() {
   const { tasks, removeTask, selectedReportDay } = useContext(userContext);
 
-  const contentTable = tasks.map((tasks, index) => {
+  const gotTasks = tasks.gotTask;
+
+  const contentTable = gotTasks.map((tasks, index) => {
     if (
       tasks.date === selectedReportDay &&
       tasks.task.time !== '' &&
@@ -32,7 +37,7 @@ export default function ReportTask() {
   return (
     <div className="report-page">
       <TopBar text={'ReportPage'} />
-      <div className="report-main-content">
+      <div className="report-task-main-content">
         <table className="report-table">
           <thead>
             <tr>
