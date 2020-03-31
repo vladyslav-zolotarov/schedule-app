@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import ReactGit checkout from 'react';
 import { Alert } from '../Alert';
 
 const wrapper = {
@@ -9,8 +9,6 @@ const wrapper = {
   bottom: '5%',
   zIndex: 9999,
 };
-
-// useEffect(() => {}, [alerts]);
 
 const AlertBox = ({ alerts }) => {
   const newAlerts = alerts.slice(0, 3);
