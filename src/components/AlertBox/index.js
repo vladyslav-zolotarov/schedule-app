@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Alert } from '../Alert';
 
 const wrapper = {
@@ -10,10 +10,13 @@ const wrapper = {
   zIndex: 9999,
 };
 
+// useEffect(() => {}, [alerts]);
+
 const AlertBox = ({ alerts }) => {
+  const newAlerts = alerts.slice(0, 3);
   return (
     <div style={wrapper}>
-      {alerts.map((a) => (
+      {newAlerts.map((a) => (
         <Alert key={a.id} id={a.id} title={a.title} type={a.type} />
       ))}
     </div>
