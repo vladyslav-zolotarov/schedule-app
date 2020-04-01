@@ -1,4 +1,4 @@
-import ReactGit checkout from 'react';
+import React from 'react';
 import { Alert } from '../Alert';
 
 const wrapper = {
