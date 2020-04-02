@@ -5,9 +5,9 @@ import { userContext } from '../../utils/context';
 import { useHistory } from 'react-router-dom';
 import { v4 } from 'uuid';
 import { ALERT_SUCCESS } from '../../utils/alertContext';
+import DateFilter from '../DateFilter';
 
-export default function Card({ task }) {
-  const date = task?.date;
+export default function Card({ date }) {
   const {
     onSelectReportDay,
     removeTasksOfDate,
@@ -37,7 +37,7 @@ export default function Card({ task }) {
     return (
       <div className="card">
         <div className="card-content">
-          <h3 className="card-head">{date}</h3>
+          <DateFilter date={date} className="card-head" />
           <div>
             {/*<div>*/}
             {/*  <p>Tasks: 0</p>*/}

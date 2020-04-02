@@ -7,16 +7,17 @@ import { userContext } from 'utils/context';
 export default function ReportPage() {
   const { tasks } = useContext(userContext);
 
-  const dates = tasks?.filter((item, index, array) => {
-    return (
-      array.map((mapItem) => mapItem['date']).indexOf(item['date']) === index
-    );
+  const sortedDates = tasks.map((t) => {
+    return t.date;
+  });
+  sortedDates.sort();
+
+  const dates = sortedDates?.filter((item, index, array) => {
+    return array.map((mapItem) => mapItem).indexOf(item) === index;
   });
 
-  const cards = dates?.map((task, index) => {
-    if (task?.time !== '' && task?.action !== '') {
-      return <Card key={index} task={task} />;
-    } else return null;
+  const cards = dates?.map((date, index) => {
+    return <Card key={index} date={date} />;
   });
 
   const newCards = cards?.filter((c) => c !== null);

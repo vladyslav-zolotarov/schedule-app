@@ -18,10 +18,13 @@
     border-right: 2px solid $color-gray-2;
     font-size: medium;
     border-right: 2px solid $color-gray-2;
+    padding: 0 10px 0 0 ;
 
 
     .input-picker{
       border-bottom: 1px solid $color-gray-2;
+      width: 80px;
+      padding: 0 0 0 10px;
 
       &:hover{
         border-bottom: 1px solid black;
@@ -35,8 +38,9 @@
   }
   .new-task-input {
     width: 100%;
+    height: 100%;
     font-family: $main-font;
-    margin: 0 1%;
+    margin: 0 10px;
     border: 0;
     font-size: medium;
     border-bottom: 1px solid $color-gray-2;

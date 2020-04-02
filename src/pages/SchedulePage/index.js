@@ -7,6 +7,7 @@ import ListOfTasks from './ListOfTasks';
 import './style.scss';
 import { ALERT_ERROR, ALERT_SUCCESS } from '../../utils/alertContext';
 import { v4 } from 'uuid';
+import DateFilter from '../../components/DateFilter';
 
 export default function SchedulePage() {
   const {
@@ -55,7 +56,7 @@ export default function SchedulePage() {
     <div className="schedule-page">
       <TopBar text={'SchedulePage'} />
       <div className="schedule-main-content">
-        <div className="schedule-text">{selectedDay}</div>
+        <DateFilter className="schedule-text" date={selectedDay} />
         <ListOfTasks
           action={action}
           time={time}

@@ -40,7 +40,7 @@ export default function App() {
 
   const selectADay = (day) => {
     if (day !== '') {
-      const newDate = dateFormat(day, 'd mmmm yyyy');
+      const newDate = dateFormat(day, 'yyyy-mm-dd');
       setSelectedDay(newDate);
     } else {
       setSelectedDay(day);
@@ -50,7 +50,8 @@ export default function App() {
   const addNewTask = async (time, action) => {
     if (selectedDay) {
       try {
-        const { data } = await createTask(selectedDay, time, action);
+        const date = dateFormat(selectedDay, 'yyyy-mm-dd');
+        const { data } = await createTask(date, time, action);
         setTasks([...tasks, data]);
       } catch (e) {
         console.error(e);

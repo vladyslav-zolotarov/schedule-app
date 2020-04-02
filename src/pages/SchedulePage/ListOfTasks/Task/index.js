@@ -99,7 +99,6 @@ export default function Task({ id, task }) {
       <form className="task-main-content">
         <div className="time-picker">
           <input
-            required
             value={timeValue}
             onChange={(e) => setTimeValue(e.target.value)}
             className="input-picker"
