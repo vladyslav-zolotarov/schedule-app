@@ -5,13 +5,13 @@ import { history } from 'utils/history';
 import './style.scss';
 
 import Menu from 'components/Menu';
-import CalendarMonthsPage from 'pages/CalendarMonthsPage';
-import WelcomePage from 'pages/WelcomePage';
-import SchedulePage from 'pages/SchedulePage';
+import CalendarMonthsPage from 'pages/CalendarMonths';
+import WelcomePage from 'pages/Welcome';
+import SchedulePage from 'pages/Schedule';
 import { userContext } from 'utils/context';
-import ReportPage from 'pages/ReportPage';
+import ReportPage from 'pages/Report';
 import dateFormat from 'dateformat/lib/dateformat';
-import ReportTask from './pages/ReportPage/ReportTask';
+import ReportTask from './pages/Report/ReportTask';
 import { useAlert } from './utils/alertContext';
 import AlertBox from './components/AlertBox';
 import {

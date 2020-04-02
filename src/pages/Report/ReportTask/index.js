@@ -6,6 +6,7 @@ import { userContext } from '../../../utils/context';
 import TopBar from '../../../components/TopBar';
 import { FaTrashAlt } from 'react-icons/all';
 import { useHistory } from 'react-router-dom';
+import DateFilter from '../../../components/DateFilter';
 
 export default function ReportTask() {
   const { tasks, removeTask, selectedReportDay } = useContext(userContext);
@@ -50,7 +51,7 @@ export default function ReportTask() {
           <thead>
             <tr>
               <th colSpan="3">
-                <h3>{selectedReportDay}</h3>
+                <DateFilter date={selectedReportDay} />
               </th>
             </tr>
             <tr>

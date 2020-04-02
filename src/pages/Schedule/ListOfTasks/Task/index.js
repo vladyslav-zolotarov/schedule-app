@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './style.scss';
 import 'components/TimePicker/style.scss';
+import CustomModal from '../../../../components/CustomModal';
 import {
   FaTrashAlt,
   FaPen,
@@ -16,9 +17,9 @@ export default function Task({ id, task }) {
   const [actionValue, setActionValue] = useState('');
   const [timeValue, setTimeValue] = useState('');
   const [edit, setEdit] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const {
-    removeTask,
     updateNewTask,
     alertFunctions: { createAlert },
   } = useContext(userContext);
@@ -49,9 +50,7 @@ export default function Task({ id, task }) {
   };
 
   const onRemove = (e) => {
-    e.preventDefault();
-    removeTask(id);
-    alertShow('Successful delete task');
+    setModalOpen(true);
   };
 
   const handleCancel = () => {
@@ -121,6 +120,12 @@ export default function Task({ id, task }) {
       <div className="task-time-value">{timeValue}</div>
       <div className="task-action-value">{actionValue}</div>
       {updateAndDelete()}
+      <CustomModal
+        open={isModalOpen}
+        id={id}
+        isModalOpen={isModalOpen}
+        setModalOpen={setModalOpen}
+      />
     </div>
   );
 }
