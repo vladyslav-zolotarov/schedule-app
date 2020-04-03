@@ -14,9 +14,10 @@ export default function CustomModal({
   id = '',
   isModalOpen = false,
   setModalOpen,
+  nameFunction,
+  title,
 }) {
   const {
-    removeTask,
     alertFunctions: { createAlert },
   } = useContext(userContext);
 
@@ -48,11 +49,11 @@ export default function CustomModal({
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    removeTask(id);
+    nameFunction(id);
     closeModal();
     return createAlert({
       id: v4(),
-      title: 'Successful delete task',
+      title,
       alertType: ALERT_SUCCESS,
     });
   };
@@ -73,7 +74,7 @@ export default function CustomModal({
         <div className="modal-heading">
           <h2 className="modal-header">Are you sure?</h2>
           <p className="modal-text">
-            Do you really want to delete this task? This process cannot be
+            Do you really want to delete this item? This process cannot be
             undone.
           </p>
         </div>

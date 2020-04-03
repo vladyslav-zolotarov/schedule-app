@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import './style.scss';
 
@@ -7,9 +7,11 @@ import TopBar from '../../../components/TopBar';
 import { FaTrashAlt } from 'react-icons/all';
 import { useHistory } from 'react-router-dom';
 import DateFilter from '../../../components/DateFilter';
+import CustomModal from '../../../components/CustomModal';
 
 export default function ReportTask() {
   const { tasks, removeTask, selectedReportDay } = useContext(userContext);
+  const [isModalOpen, setModalOpen] = useState(false);
   const history = useHistory();
 
   const contentTable = tasks?.map((tasks, index) => {
@@ -25,11 +27,19 @@ export default function ReportTask() {
           <td>
             <button
               className="report-page-butt"
-              onClick={() => removeTask(tasks.id)}
+              onClick={() => setModalOpen(true)}
             >
               <FaTrashAlt />
             </button>
           </td>
+          <CustomModal
+            open={isModalOpen}
+            id={tasks.id}
+            isModalOpen={isModalOpen}
+            setModalOpen={setModalOpen}
+            nameFunction={removeTask}
+            title={'Successful delete task'}
+          />
         </tr>
       );
     } else return null;

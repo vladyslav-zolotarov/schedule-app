@@ -20,6 +20,7 @@ export default function Task({ id, task }) {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const {
+    removeTask,
     updateNewTask,
     alertFunctions: { createAlert },
   } = useContext(userContext);
@@ -125,6 +126,8 @@ export default function Task({ id, task }) {
         id={id}
         isModalOpen={isModalOpen}
         setModalOpen={setModalOpen}
+        nameFunction={removeTask}
+        title={'Successful delete task'}
       />
     </div>
   );

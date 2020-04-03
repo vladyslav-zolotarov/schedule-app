@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './style.scss';
 import { FaTrashAlt } from 'react-icons/all';
 import { userContext } from '../../utils/context';
@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { v4 } from 'uuid';
 import { ALERT_SUCCESS } from '../../utils/alertContext';
 import DateFilter from '../DateFilter';
+import CustomModal from '../CustomModal';
 
 export default function Card({ date }) {
   const {
@@ -14,6 +15,7 @@ export default function Card({ date }) {
     alertFunctions: { createAlert },
   } = useContext(userContext);
   const history = useHistory();
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const alertShow = (title) => {
     return createAlert({
@@ -29,8 +31,10 @@ export default function Card({ date }) {
   };
 
   const removeCard = () => {
-    removeTasksOfDate(date);
-    alertShow('Successful delete card with tasks');
+    setModalOpen(true);
+
+    // removeTasksOfDate(date);
+    // alertShow('Successful delete card with tasks');
   };
 
   const content = () => {
@@ -64,5 +68,17 @@ export default function Card({ date }) {
     );
   };
 
-  return <>{content()}</>;
+  return (
+    <>
+      {content()}
+      <CustomModal
+        open={isModalOpen}
+        id={date}
+        isModalOpen={isModalOpen}
+        setModalOpen={setModalOpen}
+        nameFunction={removeTasksOfDate}
+        title={'Successful delete card of date'}
+      />
+    </>
+  );
 }
