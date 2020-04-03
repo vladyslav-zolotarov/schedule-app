@@ -25,6 +25,8 @@ export default function App() {
   const [tasks, setTasks] = useState([]);
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedReportDay, setSelectedReportDay] = useState('');
+  const [user, setUser] = useState({});
+  const [isSignedIn, setIsSignedIn] = useState(true);
   const alertFunctions = useAlert();
 
   useEffect(() => {
@@ -108,6 +110,10 @@ export default function App() {
     selectedReportDay,
     removeTasksOfDate,
     alertFunctions,
+    setUser,
+    user,
+    isSignedIn,
+    setIsSignedIn,
   };
 
   return (
@@ -116,13 +122,16 @@ export default function App() {
         <Router history={history}>
           <Menu />
           <AlertBox alerts={alertFunctions.alerts} />
-          {selectedDay === '' || !selectedDay ? <Redirect to={'/'} /> : null}
+          {/*{selectedDay === '' || !selectedDay ? <Redirect to={'/'} /> : null}*/}
+          {!user?.name && !user?.email && !user?.imgUrl ? (
+            <Redirect to={'/welcome'} />
+          ) : null}
           <Switch>
-            <Route exact path="/">
-              <CalendarMonthsPage />
-            </Route>
             <Route path={'/welcome'}>
               <WelcomePage />
+            </Route>
+            <Route exact path="/">
+              <CalendarMonthsPage />
             </Route>
             <Route path={'/day'}>
               <SchedulePage />

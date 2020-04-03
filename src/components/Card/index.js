@@ -3,27 +3,13 @@ import './style.scss';
 import { FaTrashAlt } from 'react-icons/all';
 import { userContext } from '../../utils/context';
 import { useHistory } from 'react-router-dom';
-import { v4 } from 'uuid';
-import { ALERT_SUCCESS } from '../../utils/alertContext';
 import DateFilter from '../DateFilter';
 import CustomModal from '../CustomModal';
 
 export default function Card({ date }) {
-  const {
-    onSelectReportDay,
-    removeTasksOfDate,
-    alertFunctions: { createAlert },
-  } = useContext(userContext);
+  const { onSelectReportDay, removeTasksOfDate } = useContext(userContext);
   const history = useHistory();
   const [isModalOpen, setModalOpen] = useState(false);
-
-  const alertShow = (title) => {
-    return createAlert({
-      id: v4(),
-      title,
-      alertType: ALERT_SUCCESS,
-    });
-  };
 
   const onShow = () => {
     history.push(`report-day/${date}`);
@@ -32,9 +18,6 @@ export default function Card({ date }) {
 
   const removeCard = () => {
     setModalOpen(true);
-
-    // removeTasksOfDate(date);
-    // alertShow('Successful delete card with tasks');
   };
 
   const content = () => {
@@ -42,14 +25,7 @@ export default function Card({ date }) {
       <div className="card">
         <div className="card-content">
           <DateFilter date={date} className="card-head" />
-          <div>
-            {/*<div>*/}
-            {/*  <p>Tasks: 0</p>*/}
-            {/*  <p style={{ color: 'grey', fontSize: '13px' }}>*/}
-            {/*    From 07:00 to 22:00*/}
-            {/*  </p>*/}
-            {/*</div>*/}
-          </div>
+          <div></div>
         </div>
         <div className="card-footer">
           <div className="card-butt-1">

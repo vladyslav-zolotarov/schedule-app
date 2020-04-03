@@ -1,0 +1,15 @@
+@import '../../styles/globalStyles';
+
+.welcome-content{
+  font-family: $main-font;
+  margin-left: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
+  h3{
+    padding: 20px;
+  }
+}

@@ -1,6 +1,6 @@
 import './style.scss';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Modal from 'react-modal';
 import { IoIosClose } from 'react-icons/io';
 import { userContext } from '../../utils/context';
@@ -40,6 +40,7 @@ export default function CustomModal({
   useEffect(() => {
     setModalOpen(open);
     console.log('open', open, isModalOpen);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const closeModal = () => {

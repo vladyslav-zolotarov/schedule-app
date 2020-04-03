@@ -51,6 +51,7 @@ export default function ReportTask() {
         return history.push('/report');
       }, 200);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tasks]);
 
   return (
