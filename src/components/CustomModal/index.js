@@ -39,7 +39,6 @@ export default function CustomModal({
 
   useEffect(() => {
     setModalOpen(open);
-    console.log('open', open, isModalOpen);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
@@ -50,6 +49,7 @@ export default function CustomModal({
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+    console.log('id', id);
     nameFunction(id);
     closeModal();
     return createAlert({
