@@ -8,20 +8,34 @@ import { FaTrashAlt } from 'react-icons/all';
 import { useHistory } from 'react-router-dom';
 import DateFilter from '../../../components/DateFilter';
 import CustomModal from '../../../components/CustomModal';
-import sortObjectsArray from 'sort-objects-array';
 
 export default function ReportTask() {
   const { tasks, removeTask, selectedReportDay } = useContext(userContext);
   const [isModalOpen, setModalOpen] = useState(false);
   const history = useHistory();
 
-  const sortTasks = sortObjectsArray(tasks, 'time');
+  const sortedTasks = tasks.sort((a, b) => {
+    const newATime = a?.time.split(':');
+    const newBTime = b?.time.split(':');
 
-  console.log('tasks', tasks);
+    const dateA = [
+      new Date(a.date).getFullYear(),
+      new Date(a.date).getMonth(),
+      new Date(a.date).getDate(),
+    ];
+    const dateB = [
+      new Date(b.date).getFullYear(),
+      new Date(b.date).getMonth(),
+      new Date(b.date).getDate(),
+    ];
 
-  console.log('sortTasks', sortTasks);
+    return new Date(dateA[0], dateA[1], dateA[2], newATime[0], newATime[1]) >
+      new Date(dateB[0], dateB[1], dateB[2], newBTime[0], newBTime[1])
+      ? 1
+      : -1;
+  });
 
-  const contentTable = sortTasks?.map((tasks, index) => {
+  const contentTable = sortedTasks?.map((tasks, index) => {
     if (
       tasks?.date === selectedReportDay &&
       tasks?.time !== '' &&

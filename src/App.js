@@ -22,11 +22,12 @@ import {
 } from './api/endpoints';
 
 export default function App() {
+  const localUser = localStorage.getItem('user');
+
   const [tasks, setTasks] = useState([]);
   const [selectedDay, setSelectedDay] = useState('');
   const [selectedReportDay, setSelectedReportDay] = useState('');
-  const [user, setUser] = useState({});
-  const [isSignedIn, setIsSignedIn] = useState(true);
+  const [user, setUser] = useState(localUser ? JSON.parse(localUser) : '');
   const alertFunctions = useAlert();
 
   useEffect(() => {
@@ -112,8 +113,6 @@ export default function App() {
     alertFunctions,
     setUser,
     user,
-    isSignedIn,
-    setIsSignedIn,
   };
 
   return (
@@ -123,9 +122,7 @@ export default function App() {
           <Menu />
           <AlertBox alerts={alertFunctions.alerts} />
           {/*{selectedDay === '' || !selectedDay ? <Redirect to={'/'} /> : null}*/}
-          {!user?.name && !user?.email && !user?.imgUrl ? (
-            <Redirect to={'/welcome'} />
-          ) : null}
+          {user === '' ? <Redirect to={'/welcome'} /> : null}
           <Switch>
             <Route path={'/welcome'}>
               <WelcomePage />

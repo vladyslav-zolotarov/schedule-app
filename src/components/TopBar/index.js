@@ -1,28 +1,31 @@
 import React, { useContext } from 'react';
 import './style.scss';
 import { userContext } from '../../utils/context';
-import { IoIosLogOut } from 'react-icons/io';
+import { GoogleLogout } from 'react-google-login';
 
 export default function TopBar({ text }) {
-  const { user, setUser, setIsSignedIn } = useContext(userContext);
+  const { user, setUser } = useContext(userContext);
 
-  const handleLogOut = () => {
-    setUser({});
-    setIsSignedIn(false);
+  const handleLogout = () => {
+    localStorage.setItem('token', '');
+    localStorage.setItem('user', '');
+    setUser('');
   };
 
   return (
     <div className="top-content">
       <h3>{text}</h3>
       <div className="user-content">
-        <img src={user?.imgUrl} alt="avatar" />
+        <img src={user?.imageUrl} alt="avatar" />
         <div className="user-info">
           <h3>{user?.name}</h3>
           <p>{user?.email}</p>
         </div>
-        <button onClick={handleLogOut}>
-          <IoIosLogOut />
-        </button>
+        <GoogleLogout
+          clientId="213895154902-8kj732peqg9davaln3dthinmttn0eh4d.apps.googleusercontent.com"
+          buttonText="Logout"
+          onLogoutSuccess={handleLogout}
+        ></GoogleLogout>
       </div>
     </div>
   );
