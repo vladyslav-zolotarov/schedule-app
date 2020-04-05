@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "dateformat": "^3.0.3",
     "node-sass": "^4.13.1",
+    "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-calendar": "^3.0.0",
     "react-dom": "^16.13.0",
