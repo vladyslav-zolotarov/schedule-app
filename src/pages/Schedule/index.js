@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { userContext } from 'utils/context';
+import { FaPlusCircle } from 'react-icons/fa';
 import TopBar from 'components/TopBar';
 import AddButton from 'components/AddButton';
 import ListOfTasks from './ListOfTasks';
@@ -63,7 +64,9 @@ export default function SchedulePage() {
           setTime={setTime}
           setAction={setAction}
         />
-        <AddButton onClick={handleAdd} />
+        <AddButton leftIcon={<FaPlusCircle />} onClick={handleAdd}>
+          Add new
+        </AddButton>
       </div>
     </div>
   );
