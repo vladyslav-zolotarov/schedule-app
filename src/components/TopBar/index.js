@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './style.scss';
 import { userContext } from '../../utils/context';
 import { GoogleLogout } from 'react-google-login';
+import { IoIosLogOut } from 'react-icons/io';
 
 export default function TopBar({ text }) {
   const { user, setUser } = useContext(userContext);
@@ -23,6 +24,11 @@ export default function TopBar({ text }) {
         </div>
         <GoogleLogout
           clientId="213895154902-8kj732peqg9davaln3dthinmttn0eh4d.apps.googleusercontent.com"
+          render={(renderProps) => (
+            <button onClick={renderProps.onClick}>
+              <IoIosLogOut />
+            </button>
+          )}
           buttonText="Logout"
           onLogoutSuccess={handleLogout}
         ></GoogleLogout>

@@ -30,16 +30,14 @@ export default function WelcomePage() {
 
   return (
     <div className="welcome-content">
-      <div>
-        <h3>Login with help Google</h3>
-        <GoogleLogin
-          clientId="213895154902-8kj732peqg9davaln3dthinmttn0eh4d.apps.googleusercontent.com"
-          onSuccess={handleSuccess}
-          onFailure={handleFail}
-          isSignedIn={localStorage.getItem('token')}
-          cookiePolicy="single_host_origin"
-        />
-      </div>
+      <h3>Login with help Google</h3>
+      <GoogleLogin
+        clientId="213895154902-8kj732peqg9davaln3dthinmttn0eh4d.apps.googleusercontent.com"
+        onSuccess={handleSuccess}
+        onFailure={handleFail}
+        isSignedIn={localStorage.getItem('token')}
+        cookiePolicy="single_host_origin"
+      />
     </div>
   );
 }

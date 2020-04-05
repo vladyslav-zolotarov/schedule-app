@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   FaCalendarAlt,
   GiBison,
@@ -11,9 +11,16 @@ import { userContext } from '../../utils/context';
 
 export default function Menu() {
   const { user } = useContext(userContext);
+  const [styleDisabled, setStyleDisabled] = useState('');
+
+  useEffect(() => {
+    if (user === '') {
+      setStyleDisabled('disabled');
+    } else setStyleDisabled('');
+  }, [user]);
 
   const disabled = (e) => {
-    if (!user?.name && !user?.email && !user?.imgUrl) {
+    if (user === '') {
       e.preventDefault();
     }
   };
@@ -21,11 +28,9 @@ export default function Menu() {
   return (
     <div className="menu">
       <div className="logo">
-        {/*<Link to={'/welcome'}>*/}
         <GiBison className="menu-logo" />
-        {/*</Link>*/}
       </div>
-      <div className="main-content">
+      <div className={`main-content ${styleDisabled}`}>
         <Link to={'/'} onClick={disabled}>
           <FaCalendarAlt className="menu-icon" />
         </Link>
