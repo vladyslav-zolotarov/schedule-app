@@ -4,7 +4,7 @@ import { Alert } from '../Alert';
 const wrapper = {
   display: 'flex',
   flexDirection: 'column',
-  position: 'absolute',
+  position: 'fixed',
   right: '5%',
   bottom: '5%',
   zIndex: 9999,
